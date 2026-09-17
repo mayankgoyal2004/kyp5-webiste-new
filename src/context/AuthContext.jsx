@@ -83,6 +83,7 @@ export const AuthProvider = ({ children }) => {
         setReferralCode,
         loginUser,
         logoutUser,
+        logout: logoutUser,
         refreshProfile,
         setStudent,
       }}

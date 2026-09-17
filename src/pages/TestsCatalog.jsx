@@ -90,10 +90,7 @@ export default function TestsCatalog() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {tests.map((test, index) => {
             const fallbackImg =
-              index === 0
-                ? "/assets/images/test-kyp5.png"
-                : index === 1
-                ? "/assets/images/about-service.jpg"
+              index === 0 ? "/assets/images/test-kyp5.png" : index === 1 ? "/assets/images/about-service.jpg"
                 : "/assets/images/common-kyp5.jpg";
 
             const imgSrc = resolveImageUrl(test.image, fallbackImg);

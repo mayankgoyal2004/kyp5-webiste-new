@@ -1,55 +1,59 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { ChevronDown, Menu, X, User, LogOut, LayoutDashboard } from "lucide-react";
-import { useAuth } from "../../context/AuthContext";
+import {
+  Menu,
+  X,
+  ChevronDown,
+  User,
+  LogOut,
+  LayoutDashboard,
+  Sparkles,
+  School,
+  PhoneCall,
+  LogIn,
+  Layers,
+  ArrowRight
+} from "lucide-react";
 import { useSite } from "../../context/SiteContext";
+import { useAuth } from "../../context/AuthContext";
 import publicApi from "../../api/publicApi";
-import Swal from "sweetalert2";
+import { resolveImageUrl, extractItemData } from "../../utils/dataHelper";
 
 export default function Navbar() {
+  const { siteData } = useSite();
+  const { student, isAuthenticated, logout, logoutUser } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
-  const [services, setServices] = useState([]);
-  const [scrolled, setScrolled] = useState(false);
-
-  const { isAuthenticated, student, logoutUser } = useAuth();
-  const { siteConfig } = useSite();
-  const location = useLocation();
-  const navigate = useNavigate();
+  const [servicesList, setServicesList] = useState([]);
 
   const servicesRef = useRef(null);
   const userRef = useRef(null);
 
+  // Fetch active services for dropdown
   useEffect(() => {
-    const fetchServices = async () => {
+    let isMounted = true;
+    const loadServices = async () => {
       try {
         const res = await publicApi.getServices();
-        if (res && res.data) {
-          const list = Array.isArray(res.data) ? res.data : res.data.items || [];
-          setServices(list);
+        if (isMounted && res && res.data) {
+          const list = Array.isArray(res.data) ? res.data : res.data.data || [];
+          setServicesList(list.map(extractItemData));
         }
       } catch (err) {
-        console.warn("Using fallback services", err);
+        // Fallback gracefully
       }
     };
-    fetchServices();
-  }, []);
-
-  useEffect(() => {
-    setMobileMenuOpen(false);
-    setServicesDropdownOpen(false);
-    setUserDropdownOpen(false);
-  }, [location.pathname]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+    loadServices();
+    return () => {
+      isMounted = false;
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close dropdowns on outside click
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (servicesRef.current && !servicesRef.current.contains(e.target)) {
@@ -63,118 +67,131 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setServicesDropdownOpen(false);
+    setUserDropdownOpen(false);
+  }, [location.pathname]);
+
+  const handleLogoutConfirm = async () => {
+    try {
+      if (typeof logout === "function") {
+        await logout();
+      } else if (typeof logoutUser === "function") {
+        await logoutUser();
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    navigate("/login");
+  };
+
   const isActive = (path) => {
     if (path === "/" && location.pathname === "/") return true;
     if (path !== "/" && location.pathname.startsWith(path)) return true;
     return false;
   };
 
-  const handleLogoutConfirm = () => {
-    Swal.fire({
-      title: "Logout?",
-      text: "Are you sure you want to logout?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, Logout",
-      cancelButtonText: "Cancel",
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        logoutUser();
-        Swal.fire({
-          title: "Logged Out!",
-          text: "You have been logged out successfully.",
-          icon: "success",
-          timer: 1500,
-          showConfirmButton: false,
-        });
-        navigate("/");
-      }
-    });
-  };
+  const logoSrc = resolveImageUrl(
+    siteData?.branding?.logoUrl,
+    "/assets/images/logo/main-logo.png"
+  );
 
   return (
-    <header
-      className={`sticky top-0 z-40 w-full transition-all duration-300 bg-white ${
-        scrolled ? "shadow-md py-3" : "border-b border-slate-100 py-4"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          {/* Logo Only */}
-          <Link to="/" className="flex items-center shrink-0">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition-all">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20 gap-4">
+          
+          {/* Brand Logo */}
+          <Link to="/" className="flex items-center gap-3 shrink-0 py-2">
             <img
-              src="/assets/images/logo/main-logo.png"
-              alt="KYP5 Logo"
-              className="h-11 sm:h-12 w-auto object-contain"
+              src={logoSrc}
+              alt={siteData?.general?.orgName || "KYP5 Logo"}
+              className="h-10 sm:h-11 w-auto object-contain"
               onError={(e) => {
-                e.target.src = "/assets/images/logo/kyp5.png";
+                e.target.src = "/assets/images/logo/main-logo.png";
               }}
             />
           </Link>
 
-          {/* Clean Main Nav Links (Matching Previous Website) */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-3">
+          {/* Desktop Navigation Links (Clean Single-Line with whitespace-nowrap) */}
+          <nav className="hidden xl:flex items-center gap-1.5 2xl:gap-3 flex-nowrap shrink-0">
             <Link
               to="/about-us"
-              className={`px-3 py-2 text-sm font-semibold rounded-lg transition-colors ${
-                isActive("/about-us")
-                  ? "text-[#1b93ad] font-bold"
-                  : "text-slate-700 hover:text-[#1b93ad]"
-              }`}
+              className={
+                "whitespace-nowrap px-3 py-2 text-[13px] 2xl:text-sm font-bold rounded-xl transition-all " +
+                (isActive("/about-us")
+                  ? "text-[#1b93ad] bg-sky-50/80 shadow-xs"
+                  : "text-slate-700 hover:text-[#1b93ad] hover:bg-slate-50")
+              }
             >
               About us
             </Link>
 
             <Link
               to="/why-choose-us"
-              className={`px-3 py-2 text-sm font-semibold rounded-lg transition-colors ${
-                isActive("/why-choose-us")
-                  ? "text-[#1b93ad] font-bold"
-                  : "text-slate-700 hover:text-[#1b93ad]"
-              }`}
+              className={
+                "whitespace-nowrap px-3 py-2 text-[13px] 2xl:text-sm font-bold rounded-xl transition-all " +
+                (isActive("/why-choose-us")
+                  ? "text-[#1b93ad] bg-sky-50/80 shadow-xs"
+                  : "text-slate-700 hover:text-[#1b93ad] hover:bg-slate-50")
+              }
             >
               Why Choose Us
             </Link>
 
             {/* Services Dropdown */}
-            <div className="relative" ref={servicesRef}>
+            <div className="relative shrink-0" ref={servicesRef}>
               <button
+                type="button"
                 onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
-                className="flex items-center gap-1 px-3 py-2 text-sm font-semibold text-slate-700 hover:text-[#1b93ad] transition-colors cursor-pointer"
+                className={
+                  "whitespace-nowrap flex items-center gap-1 px-3 py-2 text-[13px] 2xl:text-sm font-bold rounded-xl transition-all cursor-pointer " +
+                  (isActive("/services") || isActive("/service-details")
+                    ? "text-[#1b93ad] bg-sky-50/80 shadow-xs"
+                    : "text-slate-700 hover:text-[#1b93ad] hover:bg-slate-50")
+                }
               >
                 <span>Services</span>
                 <ChevronDown
-                  className={`w-4 h-4 transition-transform duration-200 ${
-                    servicesDropdownOpen ? "rotate-180 text-[#1b93ad]" : "text-slate-400"
-                  }`}
+                  className={
+                    "w-3.5 h-3.5 transition-transform duration-200 " +
+                    (servicesDropdownOpen ? "rotate-180 text-[#1b93ad]" : "text-slate-400")
+                  }
                 />
               </button>
 
               {servicesDropdownOpen && (
-                <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-slate-100 py-2 z-50">
-                  {services.length > 0 ? (
-                    services.map((svc, idx) => (
+                <div className="absolute left-0 top-full mt-2 w-64 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50 animate-in fade-in zoom-in-95 duration-150">
+                  <Link
+                    to="/services"
+                    className="block px-4 py-2.5 text-xs font-bold text-[#1b93ad] hover:bg-sky-50 transition-colors border-b border-slate-100"
+                  >
+                    View All Services &rarr;
+                  </Link>
+
+                  {servicesList.length > 0 ? (
+                    servicesList.map((srv) => (
                       <Link
-                        key={idx}
-                        to={`/service-details/${encodeURIComponent(svc.title)}`}
-                        className="block px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad] transition-colors"
+                        key={srv.id || srv.slug}
+                        to={"/service-details/" + encodeURIComponent(srv.title || srv.slug || srv.id)}
+                        className="block px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad] transition-colors truncate"
                       >
-                        {svc.title}
+                        {srv.title}
                       </Link>
                     ))
                   ) : (
                     <>
                       <Link
-                        to="/service-details/One-on-One%20Career%20Counseling"
-                        className="block px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad]"
+                        to="/services"
+                        className="block px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad]"
                       >
                         One-on-One Career Counseling
                       </Link>
                       <Link
-                        to="/service-details/Institutional%20School%20Assessment%20Drives"
-                        className="block px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad]"
+                        to="/services"
+                        className="block px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad]"
                       >
                         School Assessment Drives
                       </Link>
@@ -184,51 +201,71 @@ export default function Navbar() {
               )}
             </div>
 
+            {/* For Schools Link with Integrated Badge */}
+            <Link
+              to="/pricing"
+              className={
+                "whitespace-nowrap px-3 py-2 text-[13px] 2xl:text-sm font-bold rounded-xl transition-all flex items-center gap-1.5 " +
+                (isActive("/pricing") || isActive("/for-schools") || isActive("/institution")
+                  ? "text-[#1b93ad] bg-sky-50/80 shadow-xs"
+                  : "text-slate-700 hover:text-[#1b93ad] hover:bg-slate-50")
+              }
+            >
+              <School className="w-3.5 h-3.5 text-[#1b93ad] shrink-0" />
+              <span>For Schools</span>
+              <span className="text-[9px] font-black uppercase tracking-wider bg-[#1b93ad]/10 text-[#1b93ad] px-1.5 py-0.5 rounded-full border border-[#1b93ad]/20">
+                Plans
+              </span>
+            </Link>
+
             <Link
               to="/our-blogs"
-              className={`px-3 py-2 text-sm font-semibold rounded-lg transition-colors ${
-                isActive("/our-blogs")
-                  ? "text-[#1b93ad] font-bold"
-                  : "text-slate-700 hover:text-[#1b93ad]"
-              }`}
+              className={
+                "whitespace-nowrap px-3 py-2 text-[13px] 2xl:text-sm font-bold rounded-xl transition-all " +
+                (isActive("/our-blogs")
+                  ? "text-[#1b93ad] bg-sky-50/80 shadow-xs"
+                  : "text-slate-700 hover:text-[#1b93ad] hover:bg-slate-50")
+              }
             >
               Our Blogs
             </Link>
 
             <Link
               to="/our-team"
-              className={`px-3 py-2 text-sm font-semibold rounded-lg transition-colors ${
-                isActive("/our-team")
-                  ? "text-[#1b93ad] font-bold"
-                  : "text-slate-700 hover:text-[#1b93ad]"
-              }`}
+              className={
+                "whitespace-nowrap px-3 py-2 text-[13px] 2xl:text-sm font-bold rounded-xl transition-all " +
+                (isActive("/our-team")
+                  ? "text-[#1b93ad] bg-sky-50/80 shadow-xs"
+                  : "text-slate-700 hover:text-[#1b93ad] hover:bg-slate-50")
+              }
             >
               Our Team
             </Link>
 
             <Link
               to="/help-center"
-              className={`px-3 py-2 text-sm font-semibold rounded-lg transition-colors ${
-                isActive("/help-center")
-                  ? "text-[#1b93ad] font-bold"
-                  : "text-slate-700 hover:text-[#1b93ad]"
-              }`}
+              className={
+                "whitespace-nowrap px-3 py-2 text-[13px] 2xl:text-sm font-bold rounded-xl transition-all " +
+                (isActive("/help-center")
+                  ? "text-[#1b93ad] bg-sky-50/80 shadow-xs"
+                  : "text-slate-700 hover:text-[#1b93ad] hover:bg-slate-50")
+              }
             >
               Help Center
             </Link>
           </nav>
 
-          {/* Right Area: Contact Us + Login/Register (or User Profile) */}
-          <div className="hidden lg:flex items-center gap-3">
+          {/* Right Action Buttons */}
+          <div className="hidden lg:flex items-center gap-2.5 2xl:gap-3 shrink-0">
             <Link
               to="/contact-us"
-              className="inline-flex items-center justify-center bg-[#2995ac] hover:bg-[#207f94] text-white text-xs font-bold px-5 py-2.5 rounded-lg shadow-sm transition-all"
+              className="whitespace-nowrap inline-flex items-center justify-center gap-1.5 border border-[#1b93ad]/30 bg-sky-50/50 hover:bg-[#1b93ad]/10 text-[#1b93ad] text-xs 2xl:text-sm font-bold px-4 2xl:px-5 py-2.5 rounded-xl transition-all shadow-xs"
             >
-              Contact Us
+              <span>Contact Us</span>
             </Link>
 
             {isAuthenticated ? (
-              <div className="relative" ref={userRef}>
+              <div className="relative shrink-0" ref={userRef}>
                 <button
                   onClick={() => setUserDropdownOpen(!userDropdownOpen)}
                   className="flex items-center gap-2.5 pl-2 pr-3 py-1.5 rounded-xl hover:bg-slate-50 border border-slate-200 transition-colors cursor-pointer"
@@ -241,11 +278,11 @@ export default function Navbar() {
                       e.target.src = "/assets/images/auser.jpg";
                     }}
                   />
-                  <div className="text-left">
-                    <div className="text-xs font-bold text-slate-800 leading-tight">
+                  <div className="text-left hidden sm:block">
+                    <div className="text-xs font-bold text-slate-800 leading-tight whitespace-nowrap">
                       {student?.name?.split(" ")[0] || "Student"}
                     </div>
-                    <div className="text-[10px] text-slate-400 truncate max-w-[100px]">
+                    <div className="text-[10px] text-slate-400 truncate max-w-[90px]">
                       {student?.email}
                     </div>
                   </div>
@@ -253,7 +290,7 @@ export default function Navbar() {
                 </button>
 
                 {userDropdownOpen && (
-                  <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-2xl shadow-2xl border border-slate-100 py-2 z-50">
+                  <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-2xl shadow-2xl border border-slate-100 py-2 z-50 animate-in fade-in zoom-in-95 duration-150">
                     <div className="px-4 py-2 border-b border-slate-100">
                       <div className="text-xs font-bold text-slate-800">{student?.name}</div>
                       <div className="text-[11px] text-slate-500 truncate">{student?.email}</div>
@@ -280,70 +317,83 @@ export default function Navbar() {
             ) : (
               <Link
                 to="/login"
-                className="inline-flex items-center justify-center bg-[#218197] hover:bg-[#1a6e82] text-white text-xs font-bold px-5 py-2.5 rounded-lg shadow-sm transition-all"
+                className="whitespace-nowrap inline-flex items-center justify-center gap-1.5 bg-gradient-to-r from-[#1b93ad] to-[#2995ac] hover:from-[#15798e] hover:to-[#207f94] text-white text-xs 2xl:text-sm font-bold px-5 2xl:px-6 py-2.5 rounded-xl shadow-md shadow-[#1b93ad]/20 transition-all cursor-pointer"
               >
-                Login / Register
+                <LogIn className="w-3.5 h-3.5" />
+                <span>Login / Register</span>
               </Link>
             )}
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <div className="lg:hidden flex items-center gap-2">
+          {/* Mobile Menu Toggle Button */}
+          <div className="xl:hidden flex items-center gap-2">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-slate-700 rounded-lg hover:bg-slate-100 cursor-pointer"
+              className="p-2.5 text-slate-700 rounded-xl hover:bg-slate-100 border border-slate-200 transition-colors cursor-pointer"
               aria-label="Toggle Navigation"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-t border-slate-100 px-4 pt-3 pb-6 space-y-3 shadow-xl">
+        <div className="xl:hidden bg-white border-t border-slate-100 px-4 pt-4 pb-8 space-y-2 shadow-2xl animate-in slide-in-from-top-4 duration-200">
           <Link
             to="/about-us"
-            className="block px-3 py-2 text-sm font-semibold text-slate-700 hover:text-[#1b93ad]"
+            className="block px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad] rounded-xl transition-colors"
           >
             About us
           </Link>
           <Link
             to="/why-choose-us"
-            className="block px-3 py-2 text-sm font-semibold text-slate-700 hover:text-[#1b93ad]"
+            className="block px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad] rounded-xl transition-colors"
           >
             Why Choose Us
           </Link>
           <Link
             to="/services"
-            className="block px-3 py-2 text-sm font-semibold text-slate-700 hover:text-[#1b93ad]"
+            className="block px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad] rounded-xl transition-colors"
           >
             Services
           </Link>
           <Link
+            to="/pricing"
+            className="flex items-center justify-between px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad] rounded-xl transition-colors"
+          >
+            <div className="flex items-center gap-2">
+              <School className="w-4 h-4 text-[#1b93ad]" />
+              <span>For Schools & Pricing</span>
+            </div>
+            <span className="text-[9px] font-black uppercase tracking-wider bg-[#1b93ad]/10 text-[#1b93ad] px-2 py-0.5 rounded-full">
+              Plans
+            </span>
+          </Link>
+          <Link
             to="/our-blogs"
-            className="block px-3 py-2 text-sm font-semibold text-slate-700 hover:text-[#1b93ad]"
+            className="block px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad] rounded-xl transition-colors"
           >
             Our Blogs
           </Link>
           <Link
             to="/our-team"
-            className="block px-3 py-2 text-sm font-semibold text-slate-700 hover:text-[#1b93ad]"
+            className="block px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad] rounded-xl transition-colors"
           >
             Our Team
           </Link>
           <Link
             to="/help-center"
-            className="block px-3 py-2 text-sm font-semibold text-slate-700 hover:text-[#1b93ad]"
+            className="block px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad] rounded-xl transition-colors"
           >
             Help Center
           </Link>
 
-          <div className="pt-4 border-t border-slate-100 flex flex-col gap-2">
+          <div className="pt-4 border-t border-slate-100 flex flex-col gap-2.5">
             <Link
               to="/contact-us"
-              className="w-full text-center py-2.5 bg-[#2995ac] text-white rounded-lg text-xs font-bold"
+              className="w-full text-center py-3 bg-sky-50 text-[#1b93ad] border border-[#1b93ad]/30 rounded-xl text-xs font-bold shadow-xs"
             >
               Contact Us
             </Link>
@@ -351,14 +401,14 @@ export default function Navbar() {
             {isAuthenticated ? (
               <button
                 onClick={handleLogoutConfirm}
-                className="w-full text-center py-2.5 text-red-600 border border-red-200 rounded-lg text-xs font-bold"
+                className="w-full text-center py-3 text-red-600 border border-red-200 rounded-xl text-xs font-bold hover:bg-red-50"
               >
                 Logout
               </button>
             ) : (
               <Link
                 to="/login"
-                className="w-full text-center py-2.5 bg-[#218197] text-white rounded-lg text-xs font-bold"
+                className="w-full text-center py-3 bg-gradient-to-r from-[#1b93ad] to-[#2995ac] text-white rounded-xl text-xs font-bold shadow-md shadow-[#1b93ad]/20"
               >
                 Login / Register
               </Link>

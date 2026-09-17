@@ -23,31 +23,31 @@ export default function HelpCenter() {
           setGuides([
             {
               id: "1",
-              title: "How does the KYP5 psychometric scoring algorithm work?",
+              title: "How does the KYP5 psychometric scoring algorithm work ? ",
               description:
                 "<p>KYP5 evaluates responses using the <strong>Holland RIASEC hexagram</strong> and Gardner's multiple intelligences model. Raw answers are normalized against verified Indian student distributions to compute your 3-letter profile and match it to 900+ careers.</p>",
             },
             {
               id: "2",
-              title: "Can I switch the test language while taking the exam?",
+              title: "Can I switch the test language while taking the exam ? ",
               description:
                 "<p>Yes! You can toggle between <strong>English, Punjabi, and Hindi</strong> on-the-fly using the language switcher at the top right of the examination screen without losing your progress.</p>",
             },
             {
               id: "3",
-              title: "What happens if my internet disconnects during the test?",
+              title: "What happens if my internet disconnects during the test ? ",
               description:
                 "<p>Our testing engine auto-saves each question response to our cloud backend in real time. Once your internet reconnects, you can resume exactly from your remaining time.</p>",
             },
             {
               id: "4",
-              title: "How can schools and institutions conduct batch testing?",
+              title: "How can schools and institutions conduct batch testing ? ",
               description:
                 "<p>Institutions can register for a school partner account to receive customized access codes, track classroom progress via an educator dashboard, and generate consolidated institutional reports.</p>",
             },
             {
               id: "5",
-              title: "Is the generated PDF assessment report valid for career counselors?",
+              title: "Is the generated PDF assessment report valid for career counselors ? ",
               description:
                 "<p>Yes, KYP5 certified PDF reports follow standard psychometric norms and are widely recognized by career counselors, universities, and educational psychologists across India.</p>",
             },
@@ -114,7 +114,7 @@ export default function HelpCenter() {
       {/* Support Box */}
       <div className="bg-gradient-to-r from-slate-900 to-[#1b93ad] rounded-3xl p-8 text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6">
         <div>
-          <h3 className="text-lg font-bold text-white">Still have questions?</h3>
+          <h3 className="text-lg font-bold text-white">Still have questions • </h3>
           <p className="text-xs text-cyan-100 mt-1">
             Our expert counselor support desk is ready to assist you.
           </p>

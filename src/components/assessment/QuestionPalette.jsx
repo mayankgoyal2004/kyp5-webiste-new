@@ -89,9 +89,7 @@ export default function QuestionPalette({
               btnStateClasses = "bg-purple-500 text-white border-purple-600 shadow-sm font-black";
             }
 
-            const currentActiveRing = isCurrent
-              ? "ring-2 ring-[#1b93ad] ring-offset-2 scale-105 font-black z-10"
-              : "hover:scale-102";
+            const currentActiveRing = isCurrent ? "ring-2 ring-[#1b93ad] ring-offset-2 scale-105 font-black z-10" : "hover:scale-102";
 
             return (
               <button

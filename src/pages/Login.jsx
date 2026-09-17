@@ -128,8 +128,7 @@ export default function Login() {
                 }}
                 className="text-[11px] font-bold text-cyan-600 hover:underline cursor-pointer"
               >
-                Forgot Password?
-              </button>
+                Forgot Password • </button>
             </div>
             <div className="relative">
               <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
@@ -154,7 +153,7 @@ export default function Login() {
         </form>
 
         <div className="pt-4 border-t border-slate-100 text-center text-xs text-slate-600">
-          <span>Don't have a student account? </span>
+          <span>Don't have a student account • </span>
           <Link to="/register" className="font-bold text-cyan-600 hover:underline">
             Register Here
           </Link>

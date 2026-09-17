@@ -25,7 +25,7 @@ export const resolveImageUrl = (path, fallback = "/assets/images/common-kyp5.jpg
     return clean;
   }
   const apiBase = import.meta.env.VITE_API_BASE_URL || "http://localhost:7777/api/";
-  const origin = apiBase.replace(/\/api\/?$/, "");
+  const origin = apiBase.replace(/\/api\/ • $/, "");
   const cleanPath = clean.startsWith("/") ? clean : `/${clean}`;
   return `${origin}${cleanPath}`;
 };

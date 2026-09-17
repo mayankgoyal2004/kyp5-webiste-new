@@ -31,6 +31,9 @@ import TermsConditions from "./pages/TermsConditions";
 import StudentDashboard from "./pages/StudentDashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Pricing from "./pages/Pricing";
+import ForSchools from "./pages/ForSchools";
+import InstitutionRegister from "./pages/InstitutionRegister";
 import NotFound from "./pages/NotFound";
 
 export default function App() {
@@ -54,7 +57,7 @@ export default function App() {
           />
 
           <Routes>
-            {/* Website Pages WITH Header/Footer (Exact modules from previous website) */}
+            {/* Website Pages WITH Header/Footer */}
             <Route element={<MainLayout />}>
               <Route path="/" element={<Home />} />
               <Route path="/about-us" element={<AboutUs />} />
@@ -66,6 +69,12 @@ export default function App() {
               <Route path="/our-team" element={<OurTeam />} />
               <Route path="/help-center" element={<HelpCenter />} />
               <Route path="/contact-us" element={<ContactUs />} />
+
+              {/* Institutional & Pricing Modules */}
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/institution/plans" element={<Pricing />} />
+              <Route path="/for-schools" element={<ForSchools />} />
+              <Route path="/institution/register" element={<InstitutionRegister />} />
 
               {/* Assessment Discovery & Instructions */}
               <Route path="/tests" element={<TestsCatalog />} />

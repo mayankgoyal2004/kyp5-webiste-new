@@ -126,8 +126,7 @@ export default function ForSchoolsBanner() {
                     School Referral Verification
                   </h3>
                   <p className="text-xs text-slate-300">
-                    Are you a student with a school code?
-                  </p>
+                    Are you a student with a school code • </p>
                 </div>
               </div>
 
@@ -164,7 +163,7 @@ export default function ForSchoolsBanner() {
                       {verifiedSchool.name}
                     </div>
                     <Link
-                      to={`/register?ref=${verifiedSchool.referralCode}`}
+                      to={`/register ? ref=${verifiedSchool.referralCode}`}
                       className="inline-flex items-center gap-1.5 text-cyan-300 hover:text-cyan-200 font-bold underline text-xs pt-1"
                     >
                       <span>Proceed to Student Registration with this school →</span>
@@ -174,7 +173,7 @@ export default function ForSchoolsBanner() {
               </form>
 
               <div className="text-xs text-slate-400 pt-2 border-t border-white/10 flex items-center justify-between">
-                <span>Want to register your institution?</span>
+                <span>Want to register your institution • </span>
                 <Link to="/for-schools" className="text-cyan-400 font-bold hover:underline">
                   Sign up School →
                 </Link>

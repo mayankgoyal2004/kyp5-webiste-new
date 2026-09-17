@@ -26,7 +26,7 @@ export default function SampleReportPreview() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           badge="Interactive Preview"
-          title="What Does Your KYP5 Report Look Like?"
+          title="What Does Your KYP5 Report Look Like • "
           subtitle="Every test yields an exhaustive, 15+ page certified PDF report packed with actionable visual analytics, stream matches, and personalized career roadmaps."
         />
 
@@ -43,9 +43,7 @@ export default function SampleReportPreview() {
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
                     className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-                      isSelected
-                        ? "bg-cyan-500 text-slate-950 shadow-md"
-                        : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+                      isSelected ? "bg-cyan-500 text-slate-950 shadow-md" : "bg-slate-800 text-slate-300 hover:bg-slate-700"
                     }`}
                   >
                     <Icon className="w-4 h-4" />

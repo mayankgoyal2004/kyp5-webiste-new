@@ -1,17 +1,38 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Phone, Mail, Send, ShieldCheck, Facebook, Instagram, Linkedin } from "lucide-react";
-import publicApi from "../../api/publicApi";
-import toast from "react-hot-toast";
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  Phone,
+  Send,
+  Sparkles
+} from "lucide-react";
 import { useSite } from "../../context/SiteContext";
+import publicApi from "../../api/publicApi";
+import { resolveImageUrl } from "../../utils/dataHelper";
+import toast from "react-hot-toast";
 
 export default function Footer() {
+  const { siteData } = useSite();
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const { siteConfig } = useSite();
 
-  const phone = siteConfig?.contact?.phone || siteConfig?.general?.orgPhone || "+91 83528 03233";
-  const email = siteConfig?.contact?.email || siteConfig?.general?.orgEmail || "info@kyp5.com";
+  const email = siteData?.contact?.email || siteData?.general?.orgEmail || "info@kyp5.com";
+  const phone = siteData?.contact?.phone || siteData?.general?.orgPhone || "+91 83528 03233";
+  const aboutText =
+    siteData?.footer?.about ||
+    "KYP5 (Know Your Potential, Personality, Progress & Path) is an advanced psychometric assessment and career guidance platform empowering students with data-driven career choices.";
+
+  const logoSrc = resolveImageUrl(
+    siteData?.branding?.logoDarkUrl || siteData?.branding?.logoUrl,
+    "/assets/images/logo/main-logo.png"
+  );
+
+  const facebookUrl = siteData?.footer?.socialLinks?.facebook || "https://www.facebook.com/KnowYourP5/";
+  const instagramUrl = siteData?.footer?.socialLinks?.instagram || "https://www.instagram.com/know_about_your_power";
+  const linkedinUrl = siteData?.footer?.socialLinks?.linkedin || "https://linkedin.com";
 
   const handleNewsletter = async (e) => {
     e.preventDefault();
@@ -40,21 +61,21 @@ export default function Footer() {
           <div className="space-y-4">
             <Link to="/" className="inline-block">
               <img
-                src="/assets/images/logo/main-logo.png"
+                src={logoSrc}
                 alt="KYP5 Logo"
                 className="h-11 w-auto object-contain brightness-0 invert"
                 onError={(e) => {
-                  e.target.src = "/assets/images/logo/kyp5.png";
+                  e.target.src = "/assets/images/logo/main-logo.png";
                 }}
               />
             </Link>
             <p className="text-slate-400 text-xs leading-relaxed">
-              KYP5 (Know Your Potential, Personality, Progress & Path) is an advanced psychometric assessment and career guidance platform empowering students with data-driven career choices.
+              {aboutText}
             </p>
 
             <div className="flex items-center gap-3 pt-2">
               <a
-                href="https://www.facebook.com/KnowYourP5/"
+                href={facebookUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="w-7 h-7 rounded-full bg-slate-800 hover:bg-[#1877f2] text-slate-300 hover:text-white flex items-center justify-center transition-colors"
@@ -63,7 +84,7 @@ export default function Footer() {
                 <Facebook className="w-3.5 h-3.5 fill-current" />
               </a>
               <a
-                href="https://www.instagram.com/know_about_your_power"
+                href={instagramUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="w-7 h-7 rounded-full bg-slate-800 hover:bg-pink-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors"
@@ -72,7 +93,7 @@ export default function Footer() {
                 <Instagram className="w-3.5 h-3.5" />
               </a>
               <a
-                href="https://linkedin.com"
+                href={linkedinUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="w-7 h-7 rounded-full bg-slate-800 hover:bg-[#0a66c2] text-slate-300 hover:text-white flex items-center justify-center transition-colors"
@@ -122,7 +143,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Assessments */}
+          {/* Assessments & Activities */}
           <div>
             <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-4">
               Assessments
@@ -130,17 +151,7 @@ export default function Footer() {
             <ul className="space-y-2 text-xs">
               <li>
                 <Link to="/tests" className="hover:text-[#1b93ad] transition-colors">
-                  Class 8–10 Stream Selection
-                </Link>
-              </li>
-              <li>
-                <Link to="/tests" className="hover:text-[#1b93ad] transition-colors">
-                  Class 11–12 Career Discovery
-                </Link>
-              </li>
-              <li>
-                <Link to="/tests" className="hover:text-[#1b93ad] transition-colors">
-                  Graduate Employability Readiness
+                  Assessment Catalog
                 </Link>
               </li>
               <li>
@@ -149,8 +160,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/events" className="hover:text-[#1b93ad] transition-colors">
+                <Link to="/upcoming-events" className="hover:text-[#1b93ad] transition-colors">
                   Upcoming Events & Workshops
+                </Link>
+              </li>
+              <li>
+                <Link to="/student/dashboard" className="hover:text-[#1b93ad] transition-colors">
+                  Student Portal
                 </Link>
               </li>
             </ul>
@@ -198,7 +214,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>© {new Date().getFullYear()} KYP5 Assessment Portal. All Rights Reserved.</p>
+          <p>© {new Date().getFullYear()} {siteData?.general?.orgName || "KYP5 Assessment Portal"}. All Rights Reserved.</p>
           <div className="flex items-center gap-6">
             <Link to="/privacy-policy" className="hover:text-slate-300 transition-colors">
               Privacy Policy

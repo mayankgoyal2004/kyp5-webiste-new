@@ -243,9 +243,7 @@ export default function TestRunner() {
             <button
               onClick={handleToggleReview}
               className={`inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
-                currentAnswer?.isMarkedForReview
-                  ? "bg-purple-100 text-purple-700 border border-purple-300 shadow-xs"
-                  : "bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200/60"
+                currentAnswer?.isMarkedForReview ? "bg-purple-100 text-purple-700 border border-purple-300 shadow-xs" : "bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200/60"
               }`}
             >
               <Bookmark className="w-3.5 h-3.5" />
@@ -279,17 +277,13 @@ export default function TestRunner() {
                       key={opt.id}
                       onClick={() => handleSelectOption(opt.id)}
                       className={`w-full text-left p-4 sm:p-4.5 rounded-2xl border text-xs sm:text-sm font-semibold transition-all flex items-center justify-between cursor-pointer ${
-                        isSelected
-                          ? "bg-cyan-50/90 border-[#1b93ad] text-cyan-950 shadow-xs ring-1 ring-[#1b93ad]"
-                          : "bg-slate-50/60 hover:bg-slate-100/80 border-slate-200 text-slate-700"
+                        isSelected ? "bg-cyan-50/90 border-[#1b93ad] text-cyan-950 shadow-xs ring-1 ring-[#1b93ad]" : "bg-slate-50/60 hover:bg-slate-100/80 border-slate-200 text-slate-700"
                       }`}
                     >
                       <div className="flex items-center gap-3.5">
                         <span
                           className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-extrabold shrink-0 transition-colors ${
-                            isSelected
-                              ? "bg-[#1b93ad] text-white"
-                              : "bg-white border border-slate-300 text-slate-600"
+                            isSelected ? "bg-[#1b93ad] text-white" : "bg-white border border-slate-300 text-slate-600"
                           }`}
                         >
                           {String.fromCharCode(65 + i)}
@@ -348,7 +342,7 @@ export default function TestRunner() {
       <Modal
         isOpen={showSubmitModal}
         onClose={() => setShowSubmitModal(false)}
-        title="Ready to Submit Assessment?"
+        title="Ready to Submit Assessment • "
         maxWidth="max-w-md"
       >
         <div className="space-y-4">

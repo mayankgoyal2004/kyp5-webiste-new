@@ -22,7 +22,7 @@ export default function Blogs() {
           setBlogs([
             {
               id: "1",
-              title: "How to Choose the Right Stream After Class 10: Science, Commerce, or Arts?",
+              title: "How to Choose the Right Stream After Class 10: Science, Commerce, or Arts ? ",
               excerpt: "A comprehensive guide on evaluating your psychological temperament and aptitude rather than peer pressure.",
               thumbnail: "/assets/images/blog/01.jpg",
               author: "KYP5 Counseling Wing",

@@ -165,8 +165,7 @@ export default function TestResult() {
       <div className="bg-slate-50 rounded-3xl p-8 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-6">
         <div className="space-y-1 text-center sm:text-left">
           <h4 className="font-extrabold text-base text-[#0f172a]">
-            Need Expert Help Interpreting Your Results?
-          </h4>
+            Need Expert Help Interpreting Your Results • </h4>
           <p className="text-xs text-slate-600">
             Book a one-on-one session with our senior psychologists to finalize your school stream or college degree.
           </p>
