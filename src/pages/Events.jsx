@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Calendar, Clock, MapPin, ArrowRight } from "lucide-react";
+import { Calendar, Clock, MapPin, ArrowRight, Sparkles } from "lucide-react";
 import SectionHeading from "../components/common/SectionHeading";
 import publicApi from "../api/publicApi";
 import { extractListData, resolveImageUrl } from "../utils/dataHelper";
@@ -58,7 +58,7 @@ export default function Events() {
 
       {loading ? (
         <div className="min-h-[250px] flex items-center justify-center">
-          <div className="w-10 h-10 border-4 border-[#1b93ad] border-t-transparent rounded-full animate-spin" />
+          <div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -69,7 +69,7 @@ export default function Events() {
             return (
               <div
                 key={event.id || idx}
-                className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row group"
+                className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:border-indigo-200 transition-all duration-300 flex flex-col md:flex-row group"
               >
                 <div className="md:w-5/12 h-56 md:h-auto bg-slate-100 relative overflow-hidden">
                   <img
@@ -80,16 +80,16 @@ export default function Events() {
                       e.target.src = fallbackImg;
                     }}
                   />
-                  <div className="absolute top-4 left-4 bg-white/95 px-3 py-1 rounded-full text-[11px] font-extrabold text-[#1b93ad] shadow-xs">
+                  <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-[11px] font-extrabold text-indigo-700 shadow-xs border border-indigo-100">
                     Live Workshop
                   </div>
                 </div>
 
                 <div className="md:w-7/12 p-6 flex flex-col justify-between space-y-4">
                   <div className="space-y-3">
-                    <div className="space-y-1 text-xs font-semibold text-slate-500">
-                      <div className="flex items-center gap-2 text-[#1b93ad] font-bold">
-                        <Calendar className="w-3.5 h-3.5" />
+                    <div className="space-y-1.5 text-xs font-semibold text-slate-500">
+                      <div className="flex items-center gap-2 text-indigo-600 font-bold">
+                        <Calendar className="w-3.5 h-3.5 text-indigo-600" />
                         <span>
                           {new Date(event.eventDate || Date.now()).toLocaleDateString("en-IN", {
                             weekday: "short",
@@ -99,17 +99,17 @@ export default function Events() {
                           })}
                         </span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-3.5 h-3.5 text-slate-400" />
+                      <div className="flex items-center gap-2 text-slate-600">
+                        <Clock className="w-3.5 h-3.5 text-amber-500" />
                         <span>{event.eventTime || "04:00 PM IST"}</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                      <div className="flex items-center gap-2 text-slate-600">
+                        <MapPin className="w-3.5 h-3.5 text-emerald-600" />
                         <span>{event.venue || "Online Live Session"}</span>
                       </div>
                     </div>
 
-                    <h3 className="text-base font-extrabold text-[#0f172a] group-hover:text-[#1b93ad] transition-colors line-clamp-2">
+                    <h3 className="text-base font-extrabold text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-2 leading-snug">
                       {event.title}
                     </h3>
 
@@ -121,7 +121,7 @@ export default function Events() {
                   <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
                     <Link
                       to={`/upcoming-events/${event.id}`}
-                      className="inline-flex items-center gap-1.5 bg-[#2995ac] hover:bg-[#207f94] text-white text-xs font-bold px-4 py-2 rounded-xl shadow-xs transition-colors"
+                      className="inline-flex items-center gap-1.5 btn-primary text-xs py-2 px-4 shadow-xs"
                     >
                       <span>{event.buttonText || "Event Details"}</span>
                       <ArrowRight className="w-3.5 h-3.5" />

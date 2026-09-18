@@ -61,14 +61,18 @@ export default function App() {
             <Route element={<MainLayout />}>
               <Route path="/" element={<Home />} />
               <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/about" element={<AboutUs />} />
               <Route path="/why-choose-us" element={<WhyChooseUs />} />
+              <Route path="/why-psychometric" element={<WhyChooseUs />} />
               <Route path="/services" element={<Services />} />
               <Route path="/service-details/:title" element={<ServiceDetail />} />
               <Route path="/our-blogs" element={<Blogs />} />
+              <Route path="/blog" element={<Blogs />} />
               <Route path="/our-blogs/:id" element={<BlogDetail />} />
               <Route path="/our-team" element={<OurTeam />} />
               <Route path="/help-center" element={<HelpCenter />} />
               <Route path="/contact-us" element={<ContactUs />} />
+              <Route path="/contact" element={<ContactUs />} />
 
               {/* Institutional & Pricing Modules */}
               <Route path="/pricing" element={<Pricing />} />
@@ -79,6 +83,7 @@ export default function App() {
               {/* Assessment Discovery & Instructions */}
               <Route path="/tests" element={<TestsCatalog />} />
               <Route path="/test" element={<TestsCatalog />} />
+              <Route path="/individual" element={<TestsCatalog />} />
               <Route path="/courses" element={<TestsCatalog />} />
               <Route path="/course" element={<TestsCatalog />} />
               <Route path="/test/:id/instructions" element={<TestInstruction />} />
@@ -86,6 +91,7 @@ export default function App() {
 
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/events" element={<Events />} />
+              <Route path="/upcoming-events" element={<Events />} />
               <Route path="/events/:id" element={<EventDetail />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-conditions" element={<TermsConditions />} />

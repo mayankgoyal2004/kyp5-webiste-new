@@ -25,8 +25,8 @@ export default function QuestionPalette({
     <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-5">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-100 pb-4">
-        <h4 className="font-extrabold text-sm text-[#0f172a]">Question Palette</h4>
-        <span className="text-xs text-[#1b93ad] font-bold bg-cyan-50 border border-cyan-100/80 px-3 py-1 rounded-full">
+        <h4 className="font-extrabold text-sm text-slate-900">Question Palette</h4>
+        <span className="text-xs text-indigo-700 font-bold bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full">
           {answeredCount + markedAnsweredCount} / {questions.length} Attempted
         </span>
       </div>
@@ -89,7 +89,7 @@ export default function QuestionPalette({
               btnStateClasses = "bg-purple-500 text-white border-purple-600 shadow-sm font-black";
             }
 
-            const currentActiveRing = isCurrent ? "ring-2 ring-[#1b93ad] ring-offset-2 scale-105 font-black z-10" : "hover:scale-102";
+            const currentActiveRing = isCurrent ? "ring-2 ring-indigo-600 ring-offset-2 scale-105 font-black z-10" : "hover:scale-102";
 
             return (
               <button

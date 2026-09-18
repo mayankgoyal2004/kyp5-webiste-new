@@ -4,7 +4,7 @@ import TopBar from "../components/common/TopBar";
 import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
 import Modal from "../components/common/Modal";
-import { Download, CheckCircle, Compass, BarChart3, FileText } from "lucide-react";
+import { Download, CheckCircle, Compass, BarChart3, FileText, Sparkles } from "lucide-react";
 
 export default function MainLayout() {
   const { pathname } = useLocation();
@@ -15,11 +15,11 @@ export default function MainLayout() {
   }, [pathname]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-800">
+    <div className="min-h-screen flex flex-col bg-white text-slate-800">
       <TopBar />
       <Navbar />
 
-      <main className="flex-1">
+      <main className="flex-1 pb-12 lg:pb-0">
         <Outlet context={{ openSampleReport: () => setSampleReportModalOpen(true) }} />
       </main>
 
@@ -33,16 +33,19 @@ export default function MainLayout() {
         maxWidth="max-w-3xl"
       >
         <div className="space-y-6">
-          <div className="flex items-center gap-4 bg-sky-50 p-4 rounded-2xl border border-sky-200">
-            <div className="w-12 h-12 rounded-xl bg-cyan-600 text-white flex items-center justify-center shrink-0">
+          <div className="flex items-center gap-4 bg-indigo-50/70 p-5 rounded-2xl border border-indigo-100">
+            <div className="w-12 h-12 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-md">
               <FileText className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="font-extrabold text-sm text-[#0f172a]">
+              <div className="inline-flex items-center gap-1 text-[11px] font-bold text-indigo-700 uppercase tracking-wide bg-indigo-100/60 px-2 py-0.5 rounded-md mb-1">
+                <Sparkles className="w-3 h-3" /> Comprehensive Assessment Battery
+              </div>
+              <h4 className="font-extrabold text-sm sm:text-base text-slate-900">
                 KYP5 Standard Assessment Battery (15-Page Certified PDF)
               </h4>
-              <p className="text-xs text-slate-600 mt-0.5">
-                Includes RIASEC Personality Code, Gardner Intelligences, Aptitude Breakdown, Subject Stream Recommendations, and 4-Year Action Plan.
+              <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                Includes Holland RIASEC Code, Gardner Multiple Intelligences, Aptitude Breakdown, Subject Stream Recommendations, and a 4-Year Career Action Plan.
               </p>
             </div>
           </div>
@@ -50,10 +53,10 @@ export default function MainLayout() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
             <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
               <div className="font-bold text-slate-800 flex items-center gap-1.5">
-                <Compass className="w-4 h-4 text-cyan-600" />
+                <Compass className="w-4 h-4 text-indigo-600" />
                 <span>Holland RIASEC Profiler</span>
               </div>
-              <p className="text-slate-500">
+              <p className="text-slate-500 leading-relaxed">
                 Detailed radar graph and percentile mapping for Realistic, Investigative, Artistic, Social, Enterprising, and Conventional traits.
               </p>
             </div>
@@ -63,7 +66,7 @@ export default function MainLayout() {
                 <BarChart3 className="w-4 h-4 text-amber-600" />
                 <span>Stream & Career Fit Index</span>
               </div>
-              <p className="text-slate-500">
+              <p className="text-slate-500 leading-relaxed">
                 Quantitative suitability score matching Science, Commerce, and Humanities streams with 900+ occupational codes.
               </p>
             </div>
@@ -80,7 +83,7 @@ export default function MainLayout() {
               href="/assets/images/common-kyp5.jpg"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 bg-[#0288d1] hover:bg-[#0277bd] text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-md transition-colors"
+              className="btn-primary text-xs"
             >
               <Download className="w-4 h-4" />
               <span>Download Full Sample PDF</span>

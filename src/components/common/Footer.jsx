@@ -7,7 +7,10 @@ import {
   Mail,
   Phone,
   Send,
-  Sparkles
+  ShieldCheck,
+  Award,
+  CheckCircle,
+  MapPin
 } from "lucide-react";
 import { useSite } from "../../context/SiteContext";
 import publicApi from "../../api/publicApi";
@@ -21,9 +24,10 @@ export default function Footer() {
 
   const email = siteData?.contact?.email || siteData?.general?.orgEmail || "info@kyp5.com";
   const phone = siteData?.contact?.phone || siteData?.general?.orgPhone || "+91 83528 03233";
+  const address = siteData?.contact?.address || "Educational Assessment & Guidance Center, Sector 62, Institutional Area, Noida / New Delhi NCR";
   const aboutText =
     siteData?.footer?.about ||
-    "KYP5 (Know Your Potential, Personality, Progress & Path) is an advanced psychometric assessment and career guidance platform empowering students with data-driven career choices.";
+    "KYP5 (Know Your Potential, Personality, Progress & Path) is an advanced scientific psychometric assessment and career guidance platform empowering students, schools, and organizations with data-driven choices.";
 
   const logoSrc = resolveImageUrl(
     siteData?.branding?.logoDarkUrl || siteData?.branding?.logoUrl,
@@ -54,167 +58,194 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#0b1b2b] text-slate-300 pt-16 pb-8 border-t border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
+    <footer className="bg-slate-950 text-slate-300 pt-16 pb-8 border-t border-slate-800 print:hidden">
+      <div className="container-page">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800/80">
+          
           {/* Brand Col */}
           <div className="space-y-4">
-            <Link to="/" className="inline-block">
-              <img
-                src={logoSrc}
-                alt="KYP5 Logo"
-                className="h-11 w-auto object-contain brightness-0 invert"
-                onError={(e) => {
-                  e.target.src = "/assets/images/logo/main-logo.png";
-                }}
-              />
+            <Link to="/" className="inline-flex items-center gap-2.5">
+              <span className="p-1 rounded-lg bg-white inline-block">
+                <img
+                  src={logoSrc}
+                  alt="KYP5 Logo"
+                  className="h-8 w-auto object-contain"
+                  onError={(e) => {
+                    e.target.src = "/assets/images/logo/main-logo.png";
+                  }}
+                />
+              </span>
+              <span className="text-xl font-black text-white tracking-tight">
+                KYP<span className="text-indigo-400">5</span>
+              </span>
             </Link>
+
             <p className="text-slate-400 text-xs leading-relaxed">
               {aboutText}
             </p>
 
-            <div className="flex items-center gap-3 pt-2">
+            <div className="pt-2 flex items-center gap-3">
               <a
                 href={facebookUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="w-7 h-7 rounded-full bg-slate-800 hover:bg-[#1877f2] text-slate-300 hover:text-white flex items-center justify-center transition-colors"
+                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 hover:bg-[#1877f2] hover:border-transparent text-slate-400 hover:text-white flex items-center justify-center transition-colors"
                 aria-label="Facebook"
               >
-                <Facebook className="w-3.5 h-3.5 fill-current" />
+                <Facebook className="w-4 h-4 fill-current" />
               </a>
               <a
                 href={instagramUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="w-7 h-7 rounded-full bg-slate-800 hover:bg-pink-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors"
+                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 hover:bg-pink-600 hover:border-transparent text-slate-400 hover:text-white flex items-center justify-center transition-colors"
                 aria-label="Instagram"
               >
-                <Instagram className="w-3.5 h-3.5" />
+                <Instagram className="w-4 h-4" />
               </a>
               <a
                 href={linkedinUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="w-7 h-7 rounded-full bg-slate-800 hover:bg-[#0a66c2] text-slate-300 hover:text-white flex items-center justify-center transition-colors"
+                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 hover:bg-[#0a66c2] hover:border-transparent text-slate-400 hover:text-white flex items-center justify-center transition-colors"
                 aria-label="LinkedIn"
               >
-                <Linkedin className="w-3.5 h-3.5 fill-current" />
+                <Linkedin className="w-4 h-4 fill-current" />
               </a>
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Explore Columns */}
           <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-4">
-              Quick Links
+            <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-4">
+              Explore Audiences
             </h4>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-2.5 text-xs">
               <li>
-                <Link to="/about-us" className="hover:text-[#1b93ad] transition-colors">
-                  About Us
+                <Link to="/for-schools" className="hover:text-indigo-400 transition-colors flex items-center gap-1.5">
+                  <span className="text-slate-500">›</span> For Schools & Institutions
                 </Link>
               </li>
               <li>
-                <Link to="/why-choose-us" className="hover:text-[#1b93ad] transition-colors">
-                  Why Choose Us
+                <Link to="/tests" className="hover:text-indigo-400 transition-colors flex items-center gap-1.5">
+                  <span className="text-slate-500">›</span> Individual Psychometric Test
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-[#1b93ad] transition-colors">
-                  Our Services
+                <Link to="/pricing" className="hover:text-indigo-400 transition-colors flex items-center gap-1.5">
+                  <span className="text-slate-500">›</span> Pricing & School Plans
                 </Link>
               </li>
               <li>
-                <Link to="/our-team" className="hover:text-[#1b93ad] transition-colors">
-                  Our Team
-                </Link>
-              </li>
-              <li>
-                <Link to="/our-blogs" className="hover:text-[#1b93ad] transition-colors">
-                  Our Blogs
-                </Link>
-              </li>
-              <li>
-                <Link to="/help-center" className="hover:text-[#1b93ad] transition-colors">
-                  Help Center
+                <Link to="/services" className="hover:text-indigo-400 transition-colors flex items-center gap-1.5">
+                  <span className="text-slate-500">›</span> Guidance & Assessment Services
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Assessments & Activities */}
+          {/* Quick Links */}
           <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-4">
-              Assessments
+            <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-4">
+              Quick Links
             </h4>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-2.5 text-xs">
               <li>
-                <Link to="/tests" className="hover:text-[#1b93ad] transition-colors">
-                  Assessment Catalog
+                <Link to="/why-choose-us" className="hover:text-indigo-400 transition-colors">
+                  Why Psychometric Testing?
                 </Link>
               </li>
               <li>
-                <Link to="/gallery" className="hover:text-[#1b93ad] transition-colors">
+                <Link to="/about-us" className="hover:text-indigo-400 transition-colors">
+                  Trust & Accreditation
+                </Link>
+              </li>
+              <li>
+                <Link to="/our-blogs" className="hover:text-indigo-400 transition-colors">
+                  Career Insights & Blog
+                </Link>
+              </li>
+              <li>
+                <Link to="/our-team" className="hover:text-indigo-400 transition-colors">
+                  Certified Psychologists
+                </Link>
+              </li>
+              <li>
+                <Link to="/help-center" className="hover:text-indigo-400 transition-colors">
+                  Help Center & FAQ
+                </Link>
+              </li>
+              <li>
+                <Link to="/gallery" className="hover:text-indigo-400 transition-colors">
                   Campus Drives Gallery
                 </Link>
               </li>
-              <li>
-                <Link to="/upcoming-events" className="hover:text-[#1b93ad] transition-colors">
-                  Upcoming Events & Workshops
-                </Link>
-              </li>
-              <li>
-                <Link to="/student/dashboard" className="hover:text-[#1b93ad] transition-colors">
-                  Student Portal
-                </Link>
-              </li>
             </ul>
           </div>
 
-          {/* Newsletter Box */}
-          <div className="space-y-3">
-            <h4 className="text-white font-bold text-sm uppercase tracking-wider">
-              Newsletter
+          {/* Registered Office & Newsletter */}
+          <div className="space-y-4">
+            <h4 className="text-white font-bold text-xs uppercase tracking-wider">
+              Registered Office
             </h4>
-            <p className="text-xs text-slate-400">
-              Subscribe for career guidance updates, stream selection tips, and scholarships.
-            </p>
-
-            <form onSubmit={handleNewsletter} className="relative">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                value={newsletterEmail}
-                onChange={(e) => setNewsletterEmail(e.target.value)}
-                className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#1b93ad]"
-              />
-              <button
-                type="submit"
-                disabled={submitting}
-                className="absolute right-1.5 top-1.5 bg-[#2995ac] hover:bg-[#207f94] text-white p-1.5 rounded-lg transition-colors disabled:opacity-50 cursor-pointer"
-                aria-label="Subscribe"
-              >
-                <Send className="w-3.5 h-3.5" />
-              </button>
-            </form>
-
-            <div className="pt-2 text-xs space-y-1 text-slate-400">
-              <div className="flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 text-[#1b93ad] shrink-0" />
+            
+            <ul className="space-y-2 text-xs text-slate-400">
+              <li className="flex items-start gap-2">
+                <MapPin className="w-3.5 h-3.5 text-indigo-400 shrink-0 mt-0.5" />
+                <span>{address}</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <Phone className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
                 <span>{phone}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-[#1b93ad] shrink-0" />
+              </li>
+              <li className="flex items-center gap-2">
+                <Mail className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
                 <span>{email}</span>
-              </div>
+              </li>
+            </ul>
+
+            <div className="pt-2">
+              <p className="text-[11px] text-slate-400 mb-2 font-medium">Subscribe for career guidance updates</p>
+              <form onSubmit={handleNewsletter} className="relative">
+                <input
+                  type="email"
+                  placeholder="Enter email address"
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
+                  className="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+                />
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="absolute right-1 top-1 bg-indigo-600 hover:bg-indigo-500 text-white px-2.5 py-1 rounded-lg text-xs font-bold transition-colors disabled:opacity-50 cursor-pointer"
+                  aria-label="Subscribe"
+                >
+                  <Send className="w-3 h-3" />
+                </button>
+              </form>
             </div>
           </div>
         </div>
 
+        {/* Accreditation details line */}
+        <div className="py-4 border-b border-slate-900 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[11px] text-slate-400">
+          <span className="flex items-center gap-1">
+            <CheckCircle className="w-3 h-3 text-emerald-400" /> MSME Registered Institution
+          </span>
+          <span className="flex items-center gap-1">
+            <CheckCircle className="w-3 h-3 text-emerald-400" /> ISO 9001:2015 Quality Certified
+          </span>
+          <span className="flex items-center gap-1">
+            <CheckCircle className="w-3 h-3 text-emerald-400" /> Holland RIASEC & Gardner MI Model
+          </span>
+          <span className="flex items-center gap-1">
+            <CheckCircle className="w-3 h-3 text-emerald-400" /> Secure 256-bit Encrypted Portal
+          </span>
+        </div>
+
         {/* Copyright */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>© {new Date().getFullYear()} {siteData?.general?.orgName || "KYP5 Assessment Portal"}. All Rights Reserved.</p>
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+          <p>© {new Date().getFullYear()} {siteData?.general?.orgName || "KYP5 Assessment Portal"} · All Rights Reserved.</p>
           <div className="flex items-center gap-6">
             <Link to="/privacy-policy" className="hover:text-slate-300 transition-colors">
               Privacy Policy
@@ -223,7 +254,7 @@ export default function Footer() {
               Terms & Conditions
             </Link>
             <Link to="/contact-us" className="hover:text-slate-300 transition-colors">
-              Contact Us
+              Contact Support
             </Link>
           </div>
         </div>

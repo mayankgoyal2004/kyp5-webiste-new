@@ -51,8 +51,8 @@ export default function LatestBlogsSection() {
   }, []);
 
   return (
-    <section className="py-16 bg-slate-50 border-t border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 sm:py-24 bg-white border-t border-slate-200">
+      <div className="container-page">
         <SectionHeading
           badge="Latest Articles"
           title="Career Insights & Research"
@@ -67,7 +67,7 @@ export default function LatestBlogsSection() {
             return (
               <div
                 key={blog.id || idx}
-                className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
+                className="card flex flex-col justify-between overflow-hidden group hover:-translate-y-1.5 transition-all duration-300"
               >
                 <div>
                   <div className="relative h-48 bg-slate-100 overflow-hidden">
@@ -84,19 +84,19 @@ export default function LatestBlogsSection() {
                   <div className="p-6 space-y-3">
                     <div className="flex items-center gap-4 text-xs font-semibold text-slate-400">
                       <span className="flex items-center gap-1.5">
-                        <Calendar className="w-3.5 h-3.5" />
+                        <Calendar className="w-3.5 h-3.5 text-indigo-500" />
                         {new Date(blog.createdAt || Date.now()).toLocaleDateString("en-IN", {
                           month: "short",
                           day: "numeric",
                         })}
                       </span>
                       <span className="flex items-center gap-1.5">
-                        <User className="w-3.5 h-3.5" />
+                        <User className="w-3.5 h-3.5 text-indigo-500" />
                         {blog.author || "Counseling Wing"}
                       </span>
                     </div>
 
-                    <h3 className="text-base font-extrabold text-[#0f172a] group-hover:text-[#1b93ad] transition-colors line-clamp-2">
+                    <h3 className="text-lg font-extrabold text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-2">
                       {blog.title}
                     </h3>
 
@@ -109,7 +109,7 @@ export default function LatestBlogsSection() {
                 <div className="p-6 pt-0 border-t border-slate-100 mt-2 flex items-center justify-between">
                   <Link
                     to={`/our-blogs/${blog.id}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#1b93ad] hover:text-[#136e82] transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs font-extrabold text-indigo-600 hover:text-indigo-800 transition-colors"
                   >
                     <span>Read Article</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -120,10 +120,10 @@ export default function LatestBlogsSection() {
           })}
         </div>
 
-        <div className="mt-10 text-center">
+        <div className="mt-12 text-center">
           <Link
             to="/our-blogs"
-            className="inline-flex items-center gap-2 bg-[#2d3748] hover:bg-[#1a202c] text-white font-bold px-6 py-3.5 rounded-2xl text-xs sm:text-sm shadow-sm transition-all"
+            className="btn-outline text-sm px-6 py-3"
           >
             <span>Explore All Blog Articles</span>
             <ArrowRight className="w-4 h-4" />

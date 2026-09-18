@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Phone, Mail, MapPin, Send, CheckCircle2, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Send, CheckCircle2, Clock, Sparkles } from "lucide-react";
 import SectionHeading from "../components/common/SectionHeading";
 import publicApi from "../api/publicApi";
 import { useSite } from "../context/SiteContext";
@@ -20,7 +20,7 @@ export default function ContactUs() {
   const title = siteData?.contact?.title || "Get in Touch with Career Experts";
   const description =
     siteData?.contact?.description ||
-    "Have a question about our psychometric assessments, school drives, or counseling sessions • We are here to help.";
+    "Have a question about our psychometric assessments, school drives, or counseling sessions? We are here to help.";
 
   const phone = siteData?.contact?.phone || siteData?.general?.orgPhone || "+91 83528 03233";
   const email = siteData?.contact?.email || siteData?.general?.orgEmail || "info@kyp5.com";
@@ -67,14 +67,14 @@ export default function ContactUs() {
 
             <div className="space-y-4">
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-2xl bg-cyan-50 text-[#1b93ad] flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 shadow-xs">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
                   <div className="text-[11px] font-bold text-slate-400 uppercase">Telephone</div>
                   <a
                     href={`tel:${phone.replace(/\s+/g, "")}`}
-                    className="text-sm font-extrabold text-slate-800 hover:text-[#1b93ad] transition-colors"
+                    className="text-sm font-extrabold text-slate-800 hover:text-indigo-600 transition-colors"
                   >
                     {phone}
                   </a>
@@ -82,14 +82,14 @@ export default function ContactUs() {
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-2xl bg-cyan-50 text-[#1b93ad] flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 shadow-xs">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
                   <div className="text-[11px] font-bold text-slate-400 uppercase">Official Email</div>
                   <a
                     href={`mailto:${email}`}
-                    className="text-sm font-extrabold text-slate-800 hover:text-[#1b93ad] transition-colors"
+                    className="text-sm font-extrabold text-slate-800 hover:text-indigo-600 transition-colors"
                   >
                     {email}
                   </a>
@@ -97,7 +97,7 @@ export default function ContactUs() {
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-2xl bg-cyan-50 text-[#1b93ad] flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 shadow-xs">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
@@ -109,7 +109,7 @@ export default function ContactUs() {
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-2xl bg-cyan-50 text-[#1b93ad] flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 shadow-xs">
                   <Clock className="w-5 h-5" />
                 </div>
                 <div>
@@ -139,7 +139,7 @@ export default function ContactUs() {
                   setSubmitted(false);
                   setFormData({ name: "", email: "", contactNumber: "", subject: "", message: "" });
                 }}
-                className="inline-block text-xs font-bold text-[#1b93ad] hover:text-[#136e82]"
+                className="inline-block text-xs font-bold text-indigo-600 hover:text-indigo-800"
               >
                 Send Another Message →
               </button>
@@ -159,7 +159,7 @@ export default function ContactUs() {
                     placeholder="e.g. Ankit Sharma"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#1b93ad]"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
                   />
                 </div>
 
@@ -171,7 +171,7 @@ export default function ContactUs() {
                     placeholder="e.g. ankit@gmail.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#1b93ad]"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
                   />
                 </div>
               </div>
@@ -184,7 +184,7 @@ export default function ContactUs() {
                     placeholder="e.g. +91 98765 43210"
                     value={formData.contactNumber}
                     onChange={(e) => setFormData({ ...formData, contactNumber: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#1b93ad]"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
                   />
                 </div>
 
@@ -196,7 +196,7 @@ export default function ContactUs() {
                     placeholder="e.g. Stream Selection Guidance"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#1b93ad]"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
                   />
                 </div>
               </div>
@@ -209,14 +209,14 @@ export default function ContactUs() {
                   placeholder="Describe your student grade level, query, or institutional requirement..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#1b93ad]"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={submitting}
-                className="inline-flex items-center gap-2 bg-[#2995ac] hover:bg-[#207f94] text-white font-extrabold px-6 py-3 rounded-xl shadow-md transition-all text-xs disabled:opacity-50 cursor-pointer"
+                className="inline-flex items-center gap-2 btn-primary font-extrabold px-6 py-3 rounded-xl shadow-md text-xs disabled:opacity-50 cursor-pointer"
               >
                 <span>{submitting ? "Sending Query..." : "Submit Inquiry"}</span>
                 <Send className="w-3.5 h-3.5" />

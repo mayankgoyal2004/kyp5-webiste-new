@@ -235,9 +235,7 @@ export default function InstitutionRegister() {
                   <span>{copied ? "Copied!" : "Copy Link"}</span>
                 </button>
               </div>
-            </div>
-
-            {/* Instant Share Buttons */}
+            </div>            {/* Instant Share Buttons */}
             <div className="pt-2 flex flex-wrap items-center gap-3">
               <button
                 type="button"
@@ -251,7 +249,7 @@ export default function InstitutionRegister() {
               <button
                 type="button"
                 onClick={handleEmailShare}
-                className="flex-1 min-w-[140px] inline-flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-500 text-white font-bold py-3 rounded-xl text-xs transition-all cursor-pointer shadow-sm"
+                className="flex-1 min-w-[140px] inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl text-xs transition-all cursor-pointer shadow-sm"
               >
                 <Mail className="w-4 h-4" />
                 <span>Share via Email</span>
@@ -260,10 +258,10 @@ export default function InstitutionRegister() {
           </div>
 
           {/* Quick Guidance Box */}
-          <div className="bg-sky-50 border border-sky-200 rounded-2xl p-5 text-xs text-sky-900 space-y-2">
-            <h4 className="font-bold flex items-center gap-2 text-sky-950">
-              <Info className="w-4 h-4 text-[#1b93ad]" />
-              <span>What happens next • </span>
+          <div className="bg-indigo-50 border border-indigo-200 rounded-2xl p-5 text-xs text-indigo-950 space-y-2">
+            <h4 className="font-bold flex items-center gap-2 text-indigo-950">
+              <Info className="w-4 h-4 text-indigo-600" />
+              <span>What happens next?</span>
             </h4>
             <ul className="space-y-1 text-slate-700 pl-6 list-disc">
               <li>When students click your link, they are automatically connected to <strong>{registeredResult.institution?.name}</strong>.</li>
@@ -275,7 +273,7 @@ export default function InstitutionRegister() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-100">
             <Link
               to="/login"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#1b93ad] hover:bg-[#15798e] text-white px-8 py-3.5 rounded-2xl font-bold text-xs sm:text-sm shadow-md transition-all cursor-pointer"
+              className="btn-primary w-full sm:w-auto"
             >
               <span>Login to Institution Dashboard</span>
               <ArrowRight className="w-4 h-4" />
@@ -310,7 +308,7 @@ export default function InstitutionRegister() {
             <form onSubmit={handleRegister} className="space-y-5">
               {/* Institution Details */}
               <div className="space-y-4">
-                <h3 className="text-xs font-black uppercase tracking-wider text-[#1b93ad] border-b border-slate-100 pb-2 flex items-center gap-2">
+                <h3 className="text-xs font-black uppercase tracking-wider text-indigo-700 border-b border-slate-100 pb-2 flex items-center gap-2">
                   <Building2 className="w-4 h-4" />
                   <span>1. Institution Information</span>
                 </h3>
@@ -325,7 +323,7 @@ export default function InstitutionRegister() {
                     placeholder="e.g. Delhi Public School, Noida"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
                   />
                 </div>
 
@@ -337,7 +335,7 @@ export default function InstitutionRegister() {
                     <select
                       value={formData.institutionType}
                       onChange={(e) => setFormData({ ...formData, institutionType: e.target.value })}
-                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600"
                     >
                       <option value="SCHOOL">K-12 School (CBSE / ICSE / IB)</option>
                       <option value="COLLEGE">Junior College / High School</option>
@@ -355,7 +353,7 @@ export default function InstitutionRegister() {
                       placeholder="e.g. Noida, Uttar Pradesh"
                       value={formData.address}
                       onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
                     />
                   </div>
                 </div>
@@ -363,7 +361,7 @@ export default function InstitutionRegister() {
 
               {/* Admin Account Credentials */}
               <div className="space-y-4 pt-2">
-                <h3 className="text-xs font-black uppercase tracking-wider text-[#1b93ad] border-b border-slate-100 pb-2 flex items-center gap-2">
+                <h3 className="text-xs font-black uppercase tracking-wider text-indigo-700 border-b border-slate-100 pb-2 flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4" />
                   <span>2. Administrator & Login Credentials</span>
                 </h3>
@@ -379,7 +377,7 @@ export default function InstitutionRegister() {
                       placeholder="principal@dpsnoida.edu.in"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
                     />
                   </div>
 
@@ -393,7 +391,7 @@ export default function InstitutionRegister() {
                       placeholder="+91 98765 43210"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
                     />
                   </div>
                 </div>
@@ -409,7 +407,7 @@ export default function InstitutionRegister() {
                       placeholder="Min 6 characters"
                       value={formData.password}
                       onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
                     />
                   </div>
 
@@ -422,7 +420,7 @@ export default function InstitutionRegister() {
                       placeholder="e.g. DPSNOIDA2026"
                       value={formData.customReferralCode}
                       onChange={(e) => setFormData({ ...formData, customReferralCode: e.target.value.toUpperCase() })}
-                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-mono uppercase text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-mono uppercase text-slate-800 focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
                     />
                   </div>
                 </div>
@@ -430,7 +428,7 @@ export default function InstitutionRegister() {
 
               {/* Package Selection */}
               <div className="space-y-4 pt-2">
-                <h3 className="text-xs font-black uppercase tracking-wider text-[#1b93ad] border-b border-slate-100 pb-2 flex items-center gap-2">
+                <h3 className="text-xs font-black uppercase tracking-wider text-indigo-700 border-b border-slate-100 pb-2 flex items-center gap-2">
                   <CreditCard className="w-4 h-4" />
                   <span>3. Package & Billing Details</span>
                 </h3>
@@ -442,7 +440,7 @@ export default function InstitutionRegister() {
                       type="button"
                       onClick={() => setFormData({ ...formData, planCode: code })}
                       className={"p-3 rounded-2xl border text-left transition-all cursor-pointer " + (
-                        formData.planCode === code ? "border-[#1b93ad] bg-sky-50/70 ring-2 ring-[#1b93ad]/30" : "border-slate-200 bg-white hover:border-slate-300"
+                        formData.planCode === code ? "border-indigo-600 bg-indigo-50/70 ring-2 ring-indigo-600/30" : "border-slate-200 bg-white hover:border-slate-300"
                       )}
                     >
                       <div className="text-xs font-black text-slate-800">{p.name.split(" ")[0]}</div>
@@ -456,7 +454,7 @@ export default function InstitutionRegister() {
                     type="button"
                     onClick={() => setFormData({ ...formData, billingCycle: "MONTHLY" })}
                     className={"flex-1 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer " + (
-                      formData.billingCycle === "MONTHLY" ? "bg-[#1b93ad] text-white shadow-sm" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                      formData.billingCycle === "MONTHLY" ? "bg-indigo-600 text-white shadow-sm" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                     )}
                   >
                     Monthly Billing
@@ -465,7 +463,7 @@ export default function InstitutionRegister() {
                     type="button"
                     onClick={() => setFormData({ ...formData, billingCycle: "ANNUAL" })}
                     className={"flex-1 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer " + (
-                      formData.billingCycle === "ANNUAL" ? "bg-[#1b93ad] text-white shadow-sm" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                      formData.billingCycle === "ANNUAL" ? "bg-indigo-600 text-white shadow-sm" : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                     )}
                   >
                     Annual (Save 20%)
@@ -476,7 +474,7 @@ export default function InstitutionRegister() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full bg-[#1b93ad] hover:bg-[#15798e] text-white font-bold py-4 rounded-2xl text-xs sm:text-sm shadow-lg shadow-[#1b93ad]/25 transition-all cursor-pointer flex items-center justify-center gap-2"
+                className="btn-primary w-full text-xs sm:text-sm py-4"
               >
                 {submitting ? (
                   <span>Processing Institution Registration...</span>
@@ -494,12 +492,12 @@ export default function InstitutionRegister() {
           <div className="lg:col-span-5 space-y-6">
             <div className="bg-slate-900 rounded-3xl p-6 sm:p-8 text-white border border-slate-800 shadow-xl space-y-6">
               <div>
-                <span className="text-[10px] font-extrabold uppercase tracking-widest text-cyan-400">
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-indigo-400">
                   Order Breakdown
                 </span>
                 <h3 className="text-xl font-black mt-0.5">{currentPlan.name}</h3>
                 <p className="text-xs text-slate-400">
-                  {currentPlan.badge} {" ? "} {currentPlan.seats} Student Quota
+                  {currentPlan.badge} {" · "} {currentPlan.seats} Student Quota
                 </p>
               </div>
 
@@ -514,28 +512,28 @@ export default function InstitutionRegister() {
                 </div>
                 <div className="border-t border-slate-800 pt-3 flex justify-between text-sm font-black">
                   <span>Total Amount</span>
-                  <span className="text-cyan-400 text-xl font-black">
+                  <span className="text-indigo-400 text-xl font-black">
                     {"₹"}{Number(planPrice).toLocaleString("en-IN")}
                   </span>
                 </div>
               </div>
 
               <div className="bg-slate-800/80 rounded-2xl p-4 space-y-2 border border-slate-700/60 text-xs">
-                <div className="font-bold text-cyan-300 flex items-center gap-1.5">
+                <div className="font-bold text-indigo-300 flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4" />
                   <span>Institutional Benefits Included:</span>
                 </div>
                 <ul className="space-y-1.5 text-slate-300 text-[11px]">
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                     <span>Instant Custom Referral Code & WhatsApp Share Link</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                     <span>Co-branded 15-page diagnostic reports with School Logo</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                     <span>Counselor session logs & student stream analytics</span>
                   </li>
                 </ul>
@@ -543,19 +541,19 @@ export default function InstitutionRegister() {
 
               <div className="text-[11px] text-slate-400 flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>256-bit Encrypted Transaction {" ? "} Instant Workspace Setup</span>
+                <span>256-bit Encrypted Transaction {" · "} Instant Workspace Setup</span>
               </div>
             </div>
 
             {/* Assistance Box */}
             <div className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm space-y-3">
-              <h4 className="font-bold text-xs text-slate-900">Need Custom Purchase Order or MOUs • </h4>
+              <h4 className="font-bold text-xs text-slate-900">Need Custom Purchase Order or MOUs?</h4>
               <p className="text-xs text-slate-500 leading-relaxed">
                 If your institution requires official Purchase Orders, Bank NEFT/RTGS, or multi-branch quotations, our counseling directors are ready to assist.
               </p>
               <Link
                 to="/contact-us"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1b93ad] hover:underline"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 hover:underline"
               >
                 <span>Talk to Institutional Coordinator</span>
                 <ArrowRight className="w-3.5 h-3.5" />

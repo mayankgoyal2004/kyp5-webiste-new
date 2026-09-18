@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Calendar, Clock, MapPin, CheckCircle, Share2 } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, MapPin, CheckCircle, Share2, Sparkles, UserCheck } from "lucide-react";
 import publicApi from "../api/publicApi";
 import { extractItemData, resolveImageUrl } from "../utils/dataHelper";
 import RichTextContent from "../components/common/RichTextContent";
@@ -52,7 +52,7 @@ export default function EventDetail() {
   if (loading) {
     return (
       <div className="min-h-[50vh] flex items-center justify-center">
-        <div className="w-10 h-10 border-4 border-[#1b93ad] border-t-transparent rounded-full animate-spin" />
+        <div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -64,7 +64,7 @@ export default function EventDetail() {
     <div className="py-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
       <Link
         to="/upcoming-events"
-        className="inline-flex items-center gap-2 text-xs font-bold text-[#1b93ad] hover:text-[#136e82]"
+        className="inline-flex items-center gap-2 text-xs font-extrabold text-indigo-600 hover:text-indigo-800 transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         <span>Back to Events</span>
@@ -72,20 +72,20 @@ export default function EventDetail() {
 
       <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-sm space-y-6">
         <div className="space-y-4">
-          <div className="inline-block bg-cyan-50 text-[#1b93ad] px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-wider">
+          <div className="inline-block bg-indigo-50 border border-indigo-100 text-indigo-700 px-3.5 py-1 rounded-full text-[11px] font-black uppercase tracking-wider">
             Live Interactive Webinar
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-black text-[#0f172a] leading-tight">
+          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 leading-tight">
             {event?.title}
           </h1>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center gap-3">
-              <Calendar className="w-5 h-5 text-[#1b93ad] shrink-0" />
+            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 flex items-center gap-3">
+              <Calendar className="w-5 h-5 text-indigo-600 shrink-0" />
               <div>
                 <div className="text-[10px] uppercase font-bold text-slate-400">Date</div>
-                <div className="text-xs font-extrabold text-slate-800">
+                <div className="text-xs font-extrabold text-slate-900">
                   {new Date(event?.eventDate || Date.now()).toLocaleDateString("en-IN", {
                     month: "short",
                     day: "numeric",
@@ -95,26 +95,26 @@ export default function EventDetail() {
               </div>
             </div>
 
-            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center gap-3">
+            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 flex items-center gap-3">
               <Clock className="w-5 h-5 text-amber-500 shrink-0" />
               <div>
                 <div className="text-[10px] uppercase font-bold text-slate-400">Time</div>
-                <div className="text-xs font-extrabold text-slate-800">{event?.eventTime || "04:00 PM IST"}</div>
+                <div className="text-xs font-extrabold text-slate-900">{event?.eventTime || "04:00 PM IST"}</div>
               </div>
             </div>
 
-            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center gap-3">
+            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 flex items-center gap-3">
               <MapPin className="w-5 h-5 text-emerald-600 shrink-0" />
               <div>
                 <div className="text-[10px] uppercase font-bold text-slate-400">Location</div>
-                <div className="text-xs font-extrabold text-slate-800">{event?.venue || "Online Live"}</div>
+                <div className="text-xs font-extrabold text-slate-900">{event?.venue || "Online Live"}</div>
               </div>
             </div>
           </div>
         </div>
 
         {imgSrc && (
-          <div className="rounded-2xl overflow-hidden max-h-96 w-full">
+          <div className="rounded-2xl overflow-hidden max-h-96 w-full border border-slate-100">
             <img
               src={imgSrc}
               alt={event?.title}
@@ -133,7 +133,7 @@ export default function EventDetail() {
         <div className="pt-6 border-t border-slate-100 flex items-center justify-between">
           <button
             onClick={handleRegisterClick}
-            className="bg-[#2995ac] hover:bg-[#207f94] text-white font-bold text-xs px-6 py-3 rounded-xl shadow-md transition-all cursor-pointer"
+            className="btn-primary text-xs py-3 px-8 shadow-md cursor-pointer"
           >
             {event?.buttonText || "Reserve Free Seat"}
           </button>

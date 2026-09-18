@@ -225,10 +225,10 @@ export default function Register() {
   };
 
   return (
-    <div className="py-12 min-h-[85vh] flex items-center justify-center px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-2xl bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-2xl space-y-6">
+    <div className="py-12 min-h-[85vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-slate-50/50">
+      <div className="w-full max-w-2xl bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-2xl space-y-6">
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-sky-100 text-[#1b93ad] flex items-center justify-center mx-auto shadow-inner">
+          <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto shadow-inner">
             <Sparkles className="w-6 h-6" />
           </div>
           <h2 className="text-2xl sm:text-3xl font-black text-slate-900">Student Account Registration</h2>
@@ -251,8 +251,8 @@ export default function Register() {
             </div>
           </div>
         ) : refCodeFromUrl ? (
-          <div className="bg-sky-50 border border-sky-200 rounded-2xl p-3.5 text-xs text-[#1b93ad] flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-[#1b93ad] shrink-0" />
+          <div className="bg-indigo-50 border border-indigo-200 rounded-2xl p-3.5 text-xs text-indigo-700 flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-indigo-600 shrink-0" />
             <span>
               School Referral Code <strong>{refCodeFromUrl}</strong> applied.
             </span>
@@ -263,7 +263,7 @@ export default function Register() {
           
           {/* 1. Student Personal Information */}
           <div className="space-y-3">
-            <h3 className="text-xs font-black uppercase tracking-wider text-[#1b93ad] border-b border-slate-100 pb-2 flex items-center gap-2">
+            <h3 className="text-xs font-black uppercase tracking-wider text-indigo-700 border-b border-slate-100 pb-2 flex items-center gap-2">
               <User className="w-4 h-4" />
               <span>1. Student Details</span>
             </h3>
@@ -277,7 +277,7 @@ export default function Register() {
                   placeholder="e.g. Navjot Kaur"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
                 />
               </div>
 
@@ -289,7 +289,7 @@ export default function Register() {
                   placeholder="student@email.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
                 />
               </div>
             </div>
@@ -302,7 +302,7 @@ export default function Register() {
                   placeholder="+91 98765 43210"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
                 />
               </div>
 
@@ -311,7 +311,7 @@ export default function Register() {
                 <select
                   value={formData.gender}
                   onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600"
                 >
                   <option value="MALE">Male</option>
                   <option value="FEMALE">Female</option>
@@ -325,7 +325,7 @@ export default function Register() {
                   type="date"
                   value={formData.dateOfBirth}
                   onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600"
                 />
               </div>
             </div>
@@ -333,7 +333,7 @@ export default function Register() {
 
           {/* 2. Parents / Guardian Information */}
           <div className="space-y-3 pt-2">
-            <h3 className="text-xs font-black uppercase tracking-wider text-[#1b93ad] border-b border-slate-100 pb-2 flex items-center gap-2">
+            <h3 className="text-xs font-black uppercase tracking-wider text-indigo-700 border-b border-slate-100 pb-2 flex items-center gap-2">
               <Users className="w-4 h-4" />
               <span>2. Parents / Guardian Information</span>
             </h3>
@@ -347,7 +347,7 @@ export default function Register() {
                   placeholder="Father's full name"
                   value={formData.fatherName}
                   onChange={(e) => setFormData({ ...formData, fatherName: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
                 />
               </div>
 
@@ -359,7 +359,7 @@ export default function Register() {
                   placeholder="Mother's full name"
                   value={formData.motherName}
                   onChange={(e) => setFormData({ ...formData, motherName: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
                 />
               </div>
             </div>
@@ -367,7 +367,7 @@ export default function Register() {
 
           {/* 3. School & Location Information */}
           <div className="space-y-3 pt-2">
-            <h3 className="text-xs font-black uppercase tracking-wider text-[#1b93ad] border-b border-slate-100 pb-2 flex items-center gap-2">
+            <h3 className="text-xs font-black uppercase tracking-wider text-indigo-700 border-b border-slate-100 pb-2 flex items-center gap-2">
               <School className="w-4 h-4" />
               <span>3. School & Location</span>
             </h3>
@@ -381,7 +381,7 @@ export default function Register() {
                   placeholder="e.g. Delhi Public School"
                   value={formData.schoolInstitute}
                   onChange={(e) => setFormData({ ...formData, schoolInstitute: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
                 />
               </div>
 
@@ -399,7 +399,7 @@ export default function Register() {
                   placeholder="e.g. DPS2026"
                   value={formData.teacherReferrer}
                   onChange={handleReferralChange}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-mono uppercase text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-mono uppercase text-slate-800 focus:outline-none focus:border-indigo-600"
                 />
               </div>
             </div>
@@ -413,7 +413,7 @@ export default function Register() {
                   placeholder="e.g. India"
                   value={formData.country}
                   onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600"
                 />
               </div>
 
@@ -424,7 +424,7 @@ export default function Register() {
                   placeholder="e.g. Punjab / Delhi"
                   value={formData.state}
                   onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600"
                 />
               </div>
 
@@ -435,7 +435,7 @@ export default function Register() {
                   placeholder="e.g. Ludhiana / Noida"
                   value={formData.city}
                   onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600"
                 />
               </div>
             </div>
@@ -443,7 +443,7 @@ export default function Register() {
 
           {/* 4. Password & Security */}
           <div className="space-y-3 pt-2">
-            <h3 className="text-xs font-black uppercase tracking-wider text-[#1b93ad] border-b border-slate-100 pb-2 flex items-center gap-2">
+            <h3 className="text-xs font-black uppercase tracking-wider text-indigo-700 border-b border-slate-100 pb-2 flex items-center gap-2">
               <Lock className="w-4 h-4" />
               <span>4. Password & Security</span>
             </h3>
@@ -457,7 +457,7 @@ export default function Register() {
                   placeholder="Min 6 chars, 1 uppercase, 1 number"
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
                 />
                 <div className="text-[10px] text-slate-500 mt-1">
                   Must contain: &ge;6 characters, 1 uppercase letter (A-Z), 1 number (0-9)
@@ -472,7 +472,7 @@ export default function Register() {
                   placeholder="Re-enter password"
                   value={formData.confirmPassword}
                   onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
                 />
               </div>
             </div>
@@ -481,7 +481,7 @@ export default function Register() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#1b93ad] hover:bg-[#15798e] text-white font-bold py-4 rounded-2xl text-xs sm:text-sm shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
+            className="btn-primary w-full text-sm py-4"
           >
             {loading ? (
               <span>Creating Student Account...</span>
@@ -495,12 +495,12 @@ export default function Register() {
         </form>
 
         {/* Institution Onboarding Link */}
-        <div className="bg-slate-50 rounded-2xl p-4 border border-slate-200/80 text-center space-y-1">
+        <div className="bg-slate-50 rounded-2xl p-4 border border-slate-200 text-center space-y-1">
           <span className="text-xs text-slate-600 font-medium">Are you a School, Principal or Counselor?</span>
           <div>
             <Link
               to="/institution/register"
-              className="text-xs font-bold text-[#1b93ad] hover:underline inline-flex items-center gap-1"
+              className="text-xs font-bold text-indigo-600 hover:underline inline-flex items-center gap-1"
             >
               <span>Register Your School & Buy Assessment Package</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -510,7 +510,7 @@ export default function Register() {
 
         <div className="pt-2 border-t border-slate-100 text-center text-xs text-slate-600">
           <span>Already have an account? </span>
-          <Link to="/login" className="font-bold text-[#1b93ad] hover:underline">
+          <Link to="/login" className="font-bold text-indigo-600 hover:underline">
             Login
           </Link>
         </div>
@@ -536,14 +536,14 @@ export default function Register() {
               placeholder="123456"
               value={otp}
               onChange={(e) => setOtp(e.target.value.replace(/[^0-9]/g, ""))}
-              className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-center text-base font-mono font-black tracking-widest text-slate-800 focus:outline-none focus:border-[#1b93ad]"
+              className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-center text-base font-mono font-black tracking-widest text-slate-800 focus:outline-none focus:border-indigo-600"
             />
           </div>
 
           <button
             type="submit"
             disabled={verifyingOtp}
-            className="w-full bg-[#1b93ad] hover:bg-[#15798e] text-white font-bold py-3 rounded-xl text-xs cursor-pointer"
+            className="btn-primary w-full text-xs py-3"
           >
             {verifyingOtp ? "Verifying..." : "Verify OTP & Continue"}
           </button>
@@ -552,7 +552,7 @@ export default function Register() {
             <button
               type="button"
               onClick={handleResendOtp}
-              className="text-xs font-bold text-[#1b93ad] hover:underline cursor-pointer"
+              className="text-xs font-bold text-indigo-600 hover:underline cursor-pointer"
             >
               Didn't receive code? Resend OTP
             </button>

@@ -9,10 +9,13 @@ import {
   LayoutDashboard,
   Sparkles,
   School,
+  Building2,
+  UserCheck,
   PhoneCall,
   LogIn,
   Layers,
-  ArrowRight
+  ArrowRight,
+  FileText
 } from "lucide-react";
 import { useSite } from "../../context/SiteContext";
 import { useAuth } from "../../context/AuthContext";
@@ -33,7 +36,6 @@ export default function Navbar() {
   const servicesRef = useRef(null);
   const userRef = useRef(null);
 
-  // Fetch active services for dropdown
   useEffect(() => {
     let isMounted = true;
     const loadServices = async () => {
@@ -99,46 +101,82 @@ export default function Navbar() {
   );
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition-all">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-[0_2px_12px_rgba(0,0,0,0.03)] transition-all">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 gap-4">
+        <div className="flex items-center justify-between h-[68px] sm:h-20 gap-3">
           
           {/* Brand Logo */}
-          <Link to="/" className="flex items-center gap-3 shrink-0 py-2">
-            <img
-              src={logoSrc}
-              alt={siteData?.general?.orgName || "KYP5 Logo"}
-              className="h-10 sm:h-11 w-auto object-contain"
-              onError={(e) => {
-                e.target.src = "/assets/images/logo/main-logo.png";
-              }}
-            />
+          <Link to="/" className="flex items-center gap-3 shrink-0 py-2 group">
+            <span className="relative inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white shadow-xs ring-1 ring-slate-200/80 transition group-hover:ring-indigo-300">
+              <img
+                src={logoSrc}
+                alt={siteData?.general?.orgName || "KYP5 Logo"}
+                className="h-8 w-8 sm:h-9 sm:w-9 object-contain"
+                onError={(e) => {
+                  e.target.src = "/assets/images/logo/main-logo.png";
+                }}
+              />
+            </span>
+            <div className="leading-tight">
+              <span className="block text-lg font-extrabold tracking-tight text-slate-900">
+                KYP<span className="text-indigo-600">5</span>
+              </span>
+              <span className="block text-[11px] font-medium text-slate-500">
+                Scientific Career Guidance
+              </span>
+            </div>
           </Link>
 
-          {/* Desktop Navigation Links (Clean Single-Line with whitespace-nowrap) */}
-          <nav className="hidden xl:flex items-center gap-1.5 2xl:gap-3 flex-nowrap shrink-0">
+          {/* Desktop Navigation Links */}
+          <nav className="hidden xl:flex items-center gap-1 2xl:gap-2 flex-nowrap shrink-0">
             <Link
-              to="/about-us"
+              to="/"
               className={
-                "whitespace-nowrap px-3 py-2 text-[13px] 2xl:text-sm font-bold rounded-xl transition-all " +
-                (isActive("/about-us")
-                  ? "text-[#1b93ad] bg-sky-50/80 shadow-xs"
-                  : "text-slate-700 hover:text-[#1b93ad] hover:bg-slate-50")
+                "whitespace-nowrap px-3 py-2 text-[13px] 2xl:text-sm font-semibold rounded-lg transition-all " +
+                (isActive("/") && location.pathname === "/"
+                  ? "text-indigo-600 bg-indigo-50/80 font-bold shadow-xs"
+                  : "text-slate-700 hover:text-indigo-600 hover:bg-slate-50")
               }
             >
-              About us
+              Home
             </Link>
 
             <Link
-              to="/why-choose-us"
+              to="/for-schools"
               className={
-                "whitespace-nowrap px-3 py-2 text-[13px] 2xl:text-sm font-bold rounded-xl transition-all " +
-                (isActive("/why-choose-us")
-                  ? "text-[#1b93ad] bg-sky-50/80 shadow-xs"
-                  : "text-slate-700 hover:text-[#1b93ad] hover:bg-slate-50")
+                "whitespace-nowrap px-3 py-2 text-[13px] 2xl:text-sm font-semibold rounded-lg transition-all flex items-center gap-1.5 " +
+                (isActive("/for-schools") || isActive("/institution")
+                  ? "text-indigo-600 bg-indigo-50/80 font-bold shadow-xs"
+                  : "text-slate-700 hover:text-indigo-600 hover:bg-slate-50")
               }
             >
-              Why Choose Us
+              <School className="w-4 h-4 text-indigo-600 shrink-0" />
+              <span>For Schools</span>
+            </Link>
+
+            <Link
+              to="/tests"
+              className={
+                "whitespace-nowrap px-3 py-2 text-[13px] 2xl:text-sm font-semibold rounded-lg transition-all flex items-center gap-1.5 " +
+                (isActive("/tests") || isActive("/test/")
+                  ? "text-indigo-600 bg-indigo-50/80 font-bold shadow-xs"
+                  : "text-slate-700 hover:text-indigo-600 hover:bg-slate-50")
+              }
+            >
+              <UserCheck className="w-4 h-4 text-indigo-600 shrink-0" />
+              <span>Individual Test</span>
+            </Link>
+
+            <Link
+              to="/pricing"
+              className={
+                "whitespace-nowrap px-3 py-2 text-[13px] 2xl:text-sm font-semibold rounded-lg transition-all " +
+                (isActive("/pricing")
+                  ? "text-indigo-600 bg-indigo-50/80 font-bold shadow-xs"
+                  : "text-slate-700 hover:text-indigo-600 hover:bg-slate-50")
+              }
+            >
+              Pricing
             </Link>
 
             {/* Services Dropdown */}
@@ -147,17 +185,17 @@ export default function Navbar() {
                 type="button"
                 onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
                 className={
-                  "whitespace-nowrap flex items-center gap-1 px-3 py-2 text-[13px] 2xl:text-sm font-bold rounded-xl transition-all cursor-pointer " +
+                  "whitespace-nowrap flex items-center gap-1 px-3 py-2 text-[13px] 2xl:text-sm font-semibold rounded-lg transition-all cursor-pointer " +
                   (isActive("/services") || isActive("/service-details")
-                    ? "text-[#1b93ad] bg-sky-50/80 shadow-xs"
-                    : "text-slate-700 hover:text-[#1b93ad] hover:bg-slate-50")
+                    ? "text-indigo-600 bg-indigo-50/80 font-bold shadow-xs"
+                    : "text-slate-700 hover:text-indigo-600 hover:bg-slate-50")
                 }
               >
                 <span>Services</span>
                 <ChevronDown
                   className={
                     "w-3.5 h-3.5 transition-transform duration-200 " +
-                    (servicesDropdownOpen ? "rotate-180 text-[#1b93ad]" : "text-slate-400")
+                    (servicesDropdownOpen ? "rotate-180 text-indigo-600" : "text-slate-400")
                   }
                 />
               </button>
@@ -166,7 +204,7 @@ export default function Navbar() {
                 <div className="absolute left-0 top-full mt-2 w-64 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50 animate-in fade-in zoom-in-95 duration-150">
                   <Link
                     to="/services"
-                    className="block px-4 py-2.5 text-xs font-bold text-[#1b93ad] hover:bg-sky-50 transition-colors border-b border-slate-100"
+                    className="block px-4 py-2.5 text-xs font-bold text-indigo-600 hover:bg-indigo-50 transition-colors border-b border-slate-100"
                   >
                     View All Services &rarr;
                   </Link>
@@ -176,7 +214,7 @@ export default function Navbar() {
                       <Link
                         key={srv.id || srv.slug}
                         to={"/service-details/" + encodeURIComponent(srv.title || srv.slug || srv.id)}
-                        className="block px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad] transition-colors truncate"
+                        className="block px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors truncate"
                       >
                         {srv.title}
                       </Link>
@@ -185,15 +223,15 @@ export default function Navbar() {
                     <>
                       <Link
                         to="/services"
-                        className="block px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad]"
+                        className="block px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600"
                       >
-                        One-on-One Career Counseling
+                        Multiple Intelligence Career Profiling
                       </Link>
                       <Link
                         to="/services"
-                        className="block px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad]"
+                        className="block px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600"
                       >
-                        School Assessment Drives
+                        School Stream Selection Drive
                       </Link>
                     </>
                   )}
@@ -201,57 +239,28 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* For Schools Link with Integrated Badge */}
             <Link
-              to="/pricing"
+              to="/about-us"
               className={
-                "whitespace-nowrap px-3 py-2 text-[13px] 2xl:text-sm font-bold rounded-xl transition-all flex items-center gap-1.5 " +
-                (isActive("/pricing") || isActive("/for-schools") || isActive("/institution")
-                  ? "text-[#1b93ad] bg-sky-50/80 shadow-xs"
-                  : "text-slate-700 hover:text-[#1b93ad] hover:bg-slate-50")
+                "whitespace-nowrap px-3 py-2 text-[13px] 2xl:text-sm font-semibold rounded-lg transition-all " +
+                (isActive("/about-us")
+                  ? "text-indigo-600 bg-indigo-50/80 font-bold shadow-xs"
+                  : "text-slate-700 hover:text-indigo-600 hover:bg-slate-50")
               }
             >
-              <School className="w-3.5 h-3.5 text-[#1b93ad] shrink-0" />
-              <span>For Schools</span>
-              <span className="text-[9px] font-black uppercase tracking-wider bg-[#1b93ad]/10 text-[#1b93ad] px-1.5 py-0.5 rounded-full border border-[#1b93ad]/20">
-                Plans
-              </span>
+              About
             </Link>
 
             <Link
               to="/our-blogs"
               className={
-                "whitespace-nowrap px-3 py-2 text-[13px] 2xl:text-sm font-bold rounded-xl transition-all " +
+                "whitespace-nowrap px-3 py-2 text-[13px] 2xl:text-sm font-semibold rounded-lg transition-all " +
                 (isActive("/our-blogs")
-                  ? "text-[#1b93ad] bg-sky-50/80 shadow-xs"
-                  : "text-slate-700 hover:text-[#1b93ad] hover:bg-slate-50")
+                  ? "text-indigo-600 bg-indigo-50/80 font-bold shadow-xs"
+                  : "text-slate-700 hover:text-indigo-600 hover:bg-slate-50")
               }
             >
-              Our Blogs
-            </Link>
-
-            <Link
-              to="/our-team"
-              className={
-                "whitespace-nowrap px-3 py-2 text-[13px] 2xl:text-sm font-bold rounded-xl transition-all " +
-                (isActive("/our-team")
-                  ? "text-[#1b93ad] bg-sky-50/80 shadow-xs"
-                  : "text-slate-700 hover:text-[#1b93ad] hover:bg-slate-50")
-              }
-            >
-              Our Team
-            </Link>
-
-            <Link
-              to="/help-center"
-              className={
-                "whitespace-nowrap px-3 py-2 text-[13px] 2xl:text-sm font-bold rounded-xl transition-all " +
-                (isActive("/help-center")
-                  ? "text-[#1b93ad] bg-sky-50/80 shadow-xs"
-                  : "text-slate-700 hover:text-[#1b93ad] hover:bg-slate-50")
-              }
-            >
-              Help Center
+              Blogs
             </Link>
           </nav>
 
@@ -259,9 +268,9 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-2.5 2xl:gap-3 shrink-0">
             <Link
               to="/contact-us"
-              className="whitespace-nowrap inline-flex items-center justify-center gap-1.5 border border-[#1b93ad]/30 bg-sky-50/50 hover:bg-[#1b93ad]/10 text-[#1b93ad] text-xs 2xl:text-sm font-bold px-4 2xl:px-5 py-2.5 rounded-xl transition-all shadow-xs"
+              className="btn-outline text-xs px-3.5 py-2"
             >
-              <span>Contact Us</span>
+              <span>Contact</span>
             </Link>
 
             {isAuthenticated ? (
@@ -273,7 +282,7 @@ export default function Navbar() {
                   <img
                     src={student?.avatar || "/assets/images/auser.jpg"}
                     alt="User"
-                    className="w-8 h-8 rounded-full object-cover border-2 border-[#1b93ad]"
+                    className="w-8 h-8 rounded-full object-cover border-2 border-indigo-600"
                     onError={(e) => {
                       e.target.src = "/assets/images/auser.jpg";
                     }}
@@ -298,9 +307,9 @@ export default function Navbar() {
 
                     <Link
                       to="/student/dashboard"
-                      className="flex items-center gap-2 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad] transition-colors"
+                      className="flex items-center gap-2 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors"
                     >
-                      <LayoutDashboard className="w-4 h-4 text-[#1b93ad]" />
+                      <LayoutDashboard className="w-4 h-4 text-indigo-600" />
                       <span>My Dashboard</span>
                     </Link>
 
@@ -315,13 +324,23 @@ export default function Navbar() {
                 )}
               </div>
             ) : (
-              <Link
-                to="/login"
-                className="whitespace-nowrap inline-flex items-center justify-center gap-1.5 bg-gradient-to-r from-[#1b93ad] to-[#2995ac] hover:from-[#15798e] hover:to-[#207f94] text-white text-xs 2xl:text-sm font-bold px-5 2xl:px-6 py-2.5 rounded-xl shadow-md shadow-[#1b93ad]/20 transition-all cursor-pointer"
-              >
-                <LogIn className="w-3.5 h-3.5" />
-                <span>Login / Register</span>
-              </Link>
+              <div className="flex items-center gap-2">
+                <Link
+                  to="/login"
+                  className="btn-outline text-xs px-3.5 py-2"
+                >
+                  <LogIn className="w-3.5 h-3.5 text-slate-600" />
+                  <span>Login</span>
+                </Link>
+
+                <Link
+                  to="/for-schools"
+                  className="btn-primary text-xs px-4 py-2"
+                >
+                  <span>Enroll School</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
             )}
           </div>
 
@@ -342,50 +361,58 @@ export default function Navbar() {
       {mobileMenuOpen && (
         <div className="xl:hidden bg-white border-t border-slate-100 px-4 pt-4 pb-8 space-y-2 shadow-2xl animate-in slide-in-from-top-4 duration-200">
           <Link
-            to="/about-us"
-            className="block px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad] rounded-xl transition-colors"
+            to="/"
+            className="block px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors"
           >
-            About us
+            Home
+          </Link>
+          <Link
+            to="/for-schools"
+            className="flex items-center gap-2 px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors"
+          >
+            <School className="w-4 h-4 text-indigo-600" />
+            <span>For Schools</span>
+          </Link>
+          <Link
+            to="/tests"
+            className="flex items-center gap-2 px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors"
+          >
+            <UserCheck className="w-4 h-4 text-indigo-600" />
+            <span>Individual Test</span>
+          </Link>
+          <Link
+            to="/pricing"
+            className="block px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors"
+          >
+            Pricing & Packages
+          </Link>
+          <Link
+            to="/services"
+            className="block px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors"
+          >
+            Our Services
+          </Link>
+          <Link
+            to="/about-us"
+            className="block px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors"
+          >
+            About Us
           </Link>
           <Link
             to="/why-choose-us"
-            className="block px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad] rounded-xl transition-colors"
+            className="block px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors"
           >
             Why Choose Us
           </Link>
           <Link
-            to="/services"
-            className="block px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad] rounded-xl transition-colors"
-          >
-            Services
-          </Link>
-          <Link
-            to="/pricing"
-            className="flex items-center justify-between px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad] rounded-xl transition-colors"
-          >
-            <div className="flex items-center gap-2">
-              <School className="w-4 h-4 text-[#1b93ad]" />
-              <span>For Schools & Pricing</span>
-            </div>
-            <span className="text-[9px] font-black uppercase tracking-wider bg-[#1b93ad]/10 text-[#1b93ad] px-2 py-0.5 rounded-full">
-              Plans
-            </span>
-          </Link>
-          <Link
             to="/our-blogs"
-            className="block px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad] rounded-xl transition-colors"
+            className="block px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors"
           >
             Our Blogs
           </Link>
           <Link
-            to="/our-team"
-            className="block px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad] rounded-xl transition-colors"
-          >
-            Our Team
-          </Link>
-          <Link
             to="/help-center"
-            className="block px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-sky-50 hover:text-[#1b93ad] rounded-xl transition-colors"
+            className="block px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors"
           >
             Help Center
           </Link>
@@ -393,7 +420,7 @@ export default function Navbar() {
           <div className="pt-4 border-t border-slate-100 flex flex-col gap-2.5">
             <Link
               to="/contact-us"
-              className="w-full text-center py-3 bg-sky-50 text-[#1b93ad] border border-[#1b93ad]/30 rounded-xl text-xs font-bold shadow-xs"
+              className="btn-outline w-full text-center py-2.5"
             >
               Contact Us
             </Link>
@@ -401,17 +428,25 @@ export default function Navbar() {
             {isAuthenticated ? (
               <button
                 onClick={handleLogoutConfirm}
-                className="w-full text-center py-3 text-red-600 border border-red-200 rounded-xl text-xs font-bold hover:bg-red-50"
+                className="w-full text-center py-2.5 text-red-600 border border-red-200 rounded-xl text-xs font-bold hover:bg-red-50"
               >
                 Logout
               </button>
             ) : (
-              <Link
-                to="/login"
-                className="w-full text-center py-3 bg-gradient-to-r from-[#1b93ad] to-[#2995ac] text-white rounded-xl text-xs font-bold shadow-md shadow-[#1b93ad]/20"
-              >
-                Login / Register
-              </Link>
+              <div className="grid grid-cols-2 gap-2">
+                <Link
+                  to="/login"
+                  className="btn-outline text-center py-2.5"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/for-schools"
+                  className="btn-primary text-center py-2.5"
+                >
+                  Enroll School
+                </Link>
+              </div>
             )}
           </div>
         </div>

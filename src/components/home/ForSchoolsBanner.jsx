@@ -42,23 +42,23 @@ export default function ForSchoolsBanner() {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-[#0b3b60] to-[#0f172a] text-white relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white relative overflow-hidden">
       {/* Background patterns */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="container-page relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left: School Proposition */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-400/10 text-cyan-300 text-xs font-bold border border-cyan-400/20">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-bold border border-indigo-400/30">
               <School className="w-4 h-4" />
               <span>For Schools, Colleges & Educational Trusts</span>
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
               Transform Your School Into a{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-amber-300">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-amber-300">
                 Career Center of Excellence
               </span>
             </h2>
@@ -70,25 +70,25 @@ export default function ForSchoolsBanner() {
             {/* School Feature List */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               <div className="flex items-start gap-2.5">
-                <CheckCircle className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
+                <CheckCircle className="w-5 h-5 text-indigo-400 shrink-0 mt-0.5" />
                 <span className="text-xs sm:text-sm text-slate-200">
                   Bulk assessment codes with zero IT setup
                 </span>
               </div>
               <div className="flex items-start gap-2.5">
-                <CheckCircle className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
+                <CheckCircle className="w-5 h-5 text-indigo-400 shrink-0 mt-0.5" />
                 <span className="text-xs sm:text-sm text-slate-200">
                   Dedicated school referral link & branding
                 </span>
               </div>
               <div className="flex items-start gap-2.5">
-                <CheckCircle className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
+                <CheckCircle className="w-5 h-5 text-indigo-400 shrink-0 mt-0.5" />
                 <span className="text-xs sm:text-sm text-slate-200">
                   Comprehensive 15-page student PDF reports
                 </span>
               </div>
               <div className="flex items-start gap-2.5">
-                <CheckCircle className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
+                <CheckCircle className="w-5 h-5 text-indigo-400 shrink-0 mt-0.5" />
                 <span className="text-xs sm:text-sm text-slate-200">
                   School-wide analytics & counselor logs
                 </span>
@@ -99,7 +99,7 @@ export default function ForSchoolsBanner() {
             <div className="flex flex-wrap items-center gap-4 pt-4">
               <Link
                 to="/for-schools"
-                className="inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-extrabold px-6 py-3.5 rounded-2xl shadow-lg shadow-cyan-500/25 transition-all text-sm transform hover:-translate-y-0.5"
+                className="btn-primary"
               >
                 <span>Enroll Your School Now</span>
                 <ArrowRight className="w-4 h-4" />
@@ -107,7 +107,7 @@ export default function ForSchoolsBanner() {
 
               <Link
                 to="/pricing"
-                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-5 py-3.5 rounded-2xl border border-white/20 transition-all text-sm"
+                className="btn-outline bg-white/10 hover:bg-white/20 text-white border-white/20"
               >
                 <span>View School Plans</span>
               </Link>
@@ -118,7 +118,7 @@ export default function ForSchoolsBanner() {
           <div className="lg:col-span-5">
             <div className="bg-white/10 backdrop-blur-xl border border-white/15 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
               <div className="flex items-center gap-3 border-b border-white/10 pb-4">
-                <div className="w-10 h-10 rounded-xl bg-cyan-400/20 text-cyan-300 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-300 flex items-center justify-center">
                   <Sparkles className="w-5 h-5" />
                 </div>
                 <div>
@@ -126,7 +126,8 @@ export default function ForSchoolsBanner() {
                     School Referral Verification
                   </h3>
                   <p className="text-xs text-slate-300">
-                    Are you a student with a school code • </p>
+                    Are you a student with a school code?
+                  </p>
                 </div>
               </div>
 
@@ -141,12 +142,12 @@ export default function ForSchoolsBanner() {
                       placeholder="e.g. DPS2026 or STMARYS"
                       value={referralInput}
                       onChange={(e) => setReferralInput(e.target.value.toUpperCase())}
-                      className="w-full bg-slate-950/60 border border-slate-600 rounded-2xl px-4 py-3 text-sm text-white placeholder-slate-500 uppercase tracking-wider font-mono font-bold focus:outline-none focus:border-cyan-400"
+                      className="w-full bg-slate-950/60 border border-slate-600 rounded-2xl px-4 py-3 text-sm text-white placeholder-slate-500 uppercase tracking-wider font-mono font-bold focus:outline-none focus:border-indigo-400"
                     />
                     <button
                       type="submit"
                       disabled={verifying}
-                      className="absolute right-2 top-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-4 py-1.5 rounded-xl text-xs transition-colors disabled:opacity-50 cursor-pointer"
+                      className="absolute right-2 top-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-4 py-1.5 rounded-xl text-xs transition-colors disabled:opacity-50 cursor-pointer"
                     >
                       {verifying ? "Checking..." : "Verify"}
                     </button>
@@ -163,8 +164,8 @@ export default function ForSchoolsBanner() {
                       {verifiedSchool.name}
                     </div>
                     <Link
-                      to={`/register ? ref=${verifiedSchool.referralCode}`}
-                      className="inline-flex items-center gap-1.5 text-cyan-300 hover:text-cyan-200 font-bold underline text-xs pt-1"
+                      to={`/register?ref=${verifiedSchool.referralCode}`}
+                      className="inline-flex items-center gap-1.5 text-indigo-300 hover:text-indigo-200 font-bold underline text-xs pt-1"
                     >
                       <span>Proceed to Student Registration with this school →</span>
                     </Link>
@@ -173,8 +174,8 @@ export default function ForSchoolsBanner() {
               </form>
 
               <div className="text-xs text-slate-400 pt-2 border-t border-white/10 flex items-center justify-between">
-                <span>Want to register your institution • </span>
-                <Link to="/for-schools" className="text-cyan-400 font-bold hover:underline">
+                <span>Want to register your institution?</span>
+                <Link to="/for-schools" className="text-indigo-400 font-bold hover:underline">
                   Sign up School →
                 </Link>
               </div>

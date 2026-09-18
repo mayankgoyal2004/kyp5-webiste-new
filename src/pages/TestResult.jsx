@@ -72,7 +72,7 @@ export default function TestResult() {
   if (loading) {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center gap-3">
-        <div className="w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin" />
+        <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
         <p className="text-xs font-bold text-slate-500">Calculating your psychometric report...</p>
       </div>
     );
@@ -86,7 +86,7 @@ export default function TestResult() {
   return (
     <div className="py-12 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
       {/* Top Banner */}
-      <div className="bg-gradient-to-br from-[#0b3b60] to-[#0f172a] rounded-3xl p-8 sm:p-12 text-white shadow-2xl space-y-4 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 rounded-3xl p-8 sm:p-12 text-white shadow-2xl space-y-4 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6">
         <div className="space-y-2">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30">
             <CheckCircle className="w-3.5 h-3.5" />
@@ -119,7 +119,7 @@ export default function TestResult() {
             </a>
           ) : (
             <div className="inline-flex items-center gap-2 bg-white/10 text-slate-300 font-bold px-5 py-3 rounded-2xl text-xs border border-white/15 animate-pulse">
-              <RefreshCw className="w-4 h-4 animate-spin text-cyan-400" />
+              <RefreshCw className="w-4 h-4 animate-spin text-indigo-400" />
               <span>Generating Certified PDF...</span>
             </div>
           )}
@@ -128,14 +128,14 @@ export default function TestResult() {
 
       {/* Primary & Secondary Trait Highlights */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div className="card p-6 sm:p-8 space-y-4">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-black uppercase text-cyan-700 bg-cyan-50 px-3 py-1 rounded-full">
+            <span className="text-xs font-black uppercase text-indigo-700 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
               Primary Holland Archetype
             </span>
-            <Compass className="w-6 h-6 text-cyan-600" />
+            <Compass className="w-6 h-6 text-indigo-600" />
           </div>
-          <h3 className="text-xl font-extrabold text-[#0f172a]">
+          <h3 className="text-xl font-extrabold text-slate-900">
             {primaryGroup?.name || "Investigative & Analytical (I)"}
           </h3>
           <p className="text-xs text-slate-600 leading-relaxed">
@@ -144,14 +144,14 @@ export default function TestResult() {
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+        <div className="card p-6 sm:p-8 space-y-4">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-black uppercase text-amber-700 bg-amber-50 px-3 py-1 rounded-full">
+            <span className="text-xs font-black uppercase text-amber-700 bg-amber-50 px-3 py-1 rounded-full border border-amber-100">
               Secondary Archetype
             </span>
             <BarChart3 className="w-6 h-6 text-amber-600" />
           </div>
-          <h3 className="text-xl font-extrabold text-[#0f172a]">
+          <h3 className="text-xl font-extrabold text-slate-900">
             {secondaryGroup?.name || "Enterprising & Leadership (E)"}
           </h3>
           <p className="text-xs text-slate-600 leading-relaxed">
@@ -164,18 +164,19 @@ export default function TestResult() {
       {/* Next Steps CTA */}
       <div className="bg-slate-50 rounded-3xl p-8 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-6">
         <div className="space-y-1 text-center sm:text-left">
-          <h4 className="font-extrabold text-base text-[#0f172a]">
-            Need Expert Help Interpreting Your Results • </h4>
+          <h4 className="font-extrabold text-base text-slate-900">
+            Need Expert Help Interpreting Your Results?
+          </h4>
           <p className="text-xs text-slate-600">
             Book a one-on-one session with our senior psychologists to finalize your school stream or college degree.
           </p>
         </div>
         <Link
           to="/services"
-          className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-bold px-5 py-3 rounded-2xl text-xs transition-colors shrink-0"
+          className="btn-primary text-xs shrink-0"
         >
           <span>Book Counselor Session</span>
-          <ArrowRight className="w-4 h-4 text-cyan-400" />
+          <ArrowRight className="w-4 h-4" />
         </Link>
       </div>
     </div>

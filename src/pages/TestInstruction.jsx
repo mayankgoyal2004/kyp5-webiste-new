@@ -90,7 +90,7 @@ export default function TestInstruction() {
   if (loading) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
-        <div className="w-10 h-10 border-4 border-[#1b93ad] border-t-transparent rounded-full animate-spin" />
+        <div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -100,7 +100,7 @@ export default function TestInstruction() {
       {/* Test Header */}
       <div className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-4">
-          <span className="text-xs font-bold text-[#1b93ad] uppercase tracking-wider bg-cyan-50 px-3 py-1 rounded-full">
+          <span className="text-xs font-bold text-indigo-700 uppercase tracking-wider bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
             Standard Psychometric Battery
           </span>
 
@@ -110,7 +110,7 @@ export default function TestInstruction() {
             <select
               value={selectedLanguage}
               onChange={(e) => setSelectedLanguage(e.target.value)}
-              className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-700 focus:outline-none focus:border-[#1b93ad]"
+              className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-700 focus:outline-none focus:border-indigo-600"
             >
               <option value="en">English</option>
               <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
@@ -119,7 +119,7 @@ export default function TestInstruction() {
           </div>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0f172a]">
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
           {test?.title || "Assessment Instructions"}
         </h1>
 
@@ -145,7 +145,7 @@ export default function TestInstruction() {
 
       {/* Rules & Instructions Body */}
       <div className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-6">
-        <h3 className="text-lg font-extrabold text-[#0f172a] border-b border-slate-100 pb-3">
+        <h3 className="text-lg font-extrabold text-slate-900 border-b border-slate-100 pb-3">
           Standard Test Guidelines & Rules
         </h3>
 
@@ -157,7 +157,7 @@ export default function TestInstruction() {
         ) : (
           <div className="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
             <div className="flex items-start gap-2.5">
-              <span className="w-5 h-5 rounded-full bg-cyan-100 text-[#1b93ad] font-bold flex items-center justify-center shrink-0 mt-0.5 text-xs">
+              <span className="w-5 h-5 rounded-full bg-indigo-100 text-indigo-700 font-bold flex items-center justify-center shrink-0 mt-0.5 text-xs">
                 1
               </span>
               <p>
@@ -166,7 +166,7 @@ export default function TestInstruction() {
             </div>
 
             <div className="flex items-start gap-2.5">
-              <span className="w-5 h-5 rounded-full bg-cyan-100 text-[#1b93ad] font-bold flex items-center justify-center shrink-0 mt-0.5 text-xs">
+              <span className="w-5 h-5 rounded-full bg-indigo-100 text-indigo-700 font-bold flex items-center justify-center shrink-0 mt-0.5 text-xs">
                 2
               </span>
               <p>
@@ -175,7 +175,7 @@ export default function TestInstruction() {
             </div>
 
             <div className="flex items-start gap-2.5">
-              <span className="w-5 h-5 rounded-full bg-cyan-100 text-[#1b93ad] font-bold flex items-center justify-center shrink-0 mt-0.5 text-xs">
+              <span className="w-5 h-5 rounded-full bg-indigo-100 text-indigo-700 font-bold flex items-center justify-center shrink-0 mt-0.5 text-xs">
                 3
               </span>
               <p>
@@ -184,7 +184,7 @@ export default function TestInstruction() {
             </div>
 
             <div className="flex items-start gap-2.5">
-              <span className="w-5 h-5 rounded-full bg-cyan-100 text-[#1b93ad] font-bold flex items-center justify-center shrink-0 mt-0.5 text-xs">
+              <span className="w-5 h-5 rounded-full bg-indigo-100 text-indigo-700 font-bold flex items-center justify-center shrink-0 mt-0.5 text-xs">
                 4
               </span>
               <p>
@@ -201,7 +201,7 @@ export default function TestInstruction() {
               type="checkbox"
               checked={agreed}
               onChange={(e) => setAgreed(e.target.checked)}
-              className="w-4 h-4 rounded text-[#1b93ad] focus:ring-[#1b93ad] mt-1 cursor-pointer"
+              className="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-600 mt-1 cursor-pointer"
             />
             <span className="text-xs sm:text-sm font-semibold text-slate-700">
               I have read and understood all examination rules. I am ready to begin my assessment in a quiet environment.
@@ -212,13 +212,13 @@ export default function TestInstruction() {
         {/* Start Action */}
         <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <Link to="/tests" className="text-xs font-bold text-slate-500 hover:text-slate-800">
-            Back to Tests
+            ← Back to Tests
           </Link>
 
           <button
             onClick={handleStartTest}
             disabled={!agreed || starting}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#2995ac] hover:bg-[#207f94] text-white font-extrabold px-8 py-3.5 rounded-2xl shadow-lg shadow-cyan-600/25 transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+            className="btn-primary w-full sm:w-auto text-sm px-8 py-3.5 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
           >
             <span>{starting ? "Initializing Assessment..." : "Begin Assessment Now"}</span>
             <ArrowRight className="w-4 h-4" />

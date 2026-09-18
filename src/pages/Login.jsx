@@ -14,7 +14,7 @@ export default function Login() {
   // Forgot password modal state
   const [forgotModalOpen, setForgotModalOpen] = useState(false);
   const [forgotEmail, setForgotEmail] = useState("");
-  const [forgotStep, setForgotStep] = useState(1); // 1 = enter email, 2 = enter otp & new pass
+  const [forgotStep, setForgotStep] = useState(1);
   const [resetOtp, setResetOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [forgotLoading, setForgotLoading] = useState(false);
@@ -89,13 +89,13 @@ export default function Login() {
   };
 
   return (
-    <div className="py-16 min-h-[75vh] flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white rounded-3xl p-8 border border-slate-200/80 shadow-xl space-y-6">
+    <div className="py-16 min-h-[75vh] flex items-center justify-center px-4 bg-slate-50/50">
+      <div className="w-full max-w-md bg-white rounded-3xl p-8 border border-slate-200 shadow-xl space-y-6">
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center mx-auto">
+          <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto">
             <GraduationCap className="w-6 h-6" />
           </div>
-          <h2 className="text-2xl font-extrabold text-[#0f172a]">Student Portal Login</h2>
+          <h2 className="text-2xl font-extrabold text-slate-900">Student Portal Login</h2>
           <p className="text-xs text-slate-500">
             Access your psychometric assessments and career reports.
           </p>
@@ -112,7 +112,7 @@ export default function Login() {
                 placeholder="name@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-10 pr-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-cyan-500"
+                className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-10 pr-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
               />
             </div>
           </div>
@@ -126,9 +126,10 @@ export default function Login() {
                   setForgotEmail(email);
                   setForgotModalOpen(true);
                 }}
-                className="text-[11px] font-bold text-cyan-600 hover:underline cursor-pointer"
+                className="text-[11px] font-bold text-indigo-600 hover:underline cursor-pointer"
               >
-                Forgot Password • </button>
+                Forgot Password?
+              </button>
             </div>
             <div className="relative">
               <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
@@ -138,7 +139,7 @@ export default function Login() {
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-10 pr-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-cyan-500"
+                className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-10 pr-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
               />
             </div>
           </div>
@@ -146,15 +147,16 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#0288d1] hover:bg-[#0277bd] text-white font-bold py-3 rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer"
+            className="btn-primary w-full text-sm py-3"
           >
-            {loading ? "Logging in..." : "Login to Student Portal →"}
+            <span>{loading ? "Logging in..." : "Login to Student Portal"}</span>
+            <ArrowRight className="w-4 h-4" />
           </button>
         </form>
 
         <div className="pt-4 border-t border-slate-100 text-center text-xs text-slate-600">
-          <span>Don't have a student account • </span>
-          <Link to="/register" className="font-bold text-cyan-600 hover:underline">
+          <span>Don't have a student account? </span>
+          <Link to="/register" className="font-bold text-indigo-600 hover:underline">
             Register Here
           </Link>
         </div>
@@ -180,13 +182,13 @@ export default function Login() {
                 placeholder="name@email.com"
                 value={forgotEmail}
                 onChange={(e) => setForgotEmail(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-cyan-500"
+                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600"
               />
             </div>
             <button
               type="submit"
               disabled={forgotLoading}
-              className="w-full bg-[#0288d1] hover:bg-[#0277bd] text-white font-bold py-2.5 rounded-xl text-xs"
+              className="btn-primary w-full text-xs py-2.5"
             >
               {forgotLoading ? "Sending OTP..." : "Send Verification OTP"}
             </button>
@@ -205,7 +207,7 @@ export default function Login() {
                 placeholder="123456"
                 value={resetOtp}
                 onChange={(e) => setResetOtp(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-center font-mono font-bold tracking-widest text-slate-800 focus:outline-none focus:border-cyan-500"
+                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-center font-mono font-bold tracking-widest text-slate-800 focus:outline-none focus:border-indigo-600"
               />
             </div>
             <div>
@@ -216,13 +218,13 @@ export default function Login() {
                 placeholder="Create new password"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-cyan-500"
+                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:border-indigo-600"
               />
             </div>
             <button
               type="submit"
               disabled={forgotLoading}
-              className="w-full bg-[#0288d1] hover:bg-[#0277bd] text-white font-bold py-2.5 rounded-xl text-xs"
+              className="btn-primary w-full text-xs py-2.5"
             >
               {forgotLoading ? "Resetting..." : "Save New Password"}
             </button>

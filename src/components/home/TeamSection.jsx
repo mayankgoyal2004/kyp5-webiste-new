@@ -48,12 +48,12 @@ export default function TeamSection() {
   }, []);
 
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 sm:py-24 bg-white border-t border-slate-200">
+      <div className="container-page">
         <SectionHeading
           badge="Expert Advisory Board"
-          title="Meet Our Research Psychologists & Counselors"
-          subtitle="Our assessment questions, scoring rubrics, and career trees are meticulously crafted by accredited educational and psychological experts."
+          title="Meet Our Psychologists & Counselors"
+          subtitle="Our assessment batteries, scoring algorithms, and career paths are meticulously crafted by certified educational and psychological experts."
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -64,10 +64,10 @@ export default function TeamSection() {
             return (
               <div
                 key={member.id || idx}
-                className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
+                className="card flex flex-col justify-between overflow-hidden group hover:-translate-y-1.5 transition-all duration-300"
               >
                 <div>
-                  <div className="relative h-64 bg-slate-100 overflow-hidden">
+                  <div className="relative h-60 bg-slate-100 overflow-hidden">
                     <img
                       src={imgSrc}
                       alt={member.name}
@@ -79,10 +79,10 @@ export default function TeamSection() {
                   </div>
 
                   <div className="p-6 space-y-2">
-                    <h3 className="text-base font-extrabold text-[#0f172a] group-hover:text-[#1b93ad] transition-colors">
+                    <h3 className="text-lg font-extrabold text-slate-900 group-hover:text-indigo-600 transition-colors">
                       {member.name}
                     </h3>
-                    <div className="text-xs font-bold text-[#1b93ad]">
+                    <div className="text-xs font-bold text-indigo-600">
                       {member.role || member.designation || "Career Consultant"}
                     </div>
                     <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed pt-1">

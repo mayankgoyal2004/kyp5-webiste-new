@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Compass, UserCheck, Building, GraduationCap, Award, ArrowRight } from "lucide-react";
+import { Compass, UserCheck, Building, GraduationCap, Award, ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
 import SectionHeading from "../components/common/SectionHeading";
 import publicApi from "../api/publicApi";
 import { extractListData } from "../utils/dataHelper";
@@ -55,31 +55,31 @@ export default function Services() {
     <div className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
       <SectionHeading
         badge="Psychometric Services"
-        title="Comprehensive Career Solutions"
-        subtitle="Empowering students, parents, and academic institutions with scientific diagnostics and personalized counseling."
+        title="Comprehensive Career & Diagnostic Solutions"
+        subtitle="Empowering students, parents, and academic institutions with scientific diagnostics, vocational mapping, and personalized counseling."
       />
 
       {loading ? (
         <div className="min-h-[200px] flex items-center justify-center">
-          <div className="w-10 h-10 border-4 border-[#1b93ad] border-t-transparent rounded-full animate-spin" />
+          <div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {services.map((service, idx) => (
             <div
               key={service.id || idx}
-              className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
+              className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:border-indigo-200 transition-all duration-300 flex flex-col justify-between group"
             >
               <div className="space-y-4">
-                <div className="w-12 h-12 rounded-2xl bg-cyan-50 text-[#1b93ad] flex items-center justify-center group-hover:bg-[#1b93ad] group-hover:text-white transition-colors">
+                <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-colors shadow-xs">
                   <Compass className="w-6 h-6" />
                 </div>
 
-                <div className="text-xs font-black text-[#1b93ad] uppercase tracking-wider">
+                <div className="text-[11px] font-black text-indigo-600 uppercase tracking-wider">
                   {service.price || "Professional Guidance"}
                 </div>
 
-                <h3 className="text-lg font-extrabold text-[#0f172a] group-hover:text-[#1b93ad] transition-colors">
+                <h3 className="text-lg font-extrabold text-slate-900 group-hover:text-indigo-600 transition-colors">
                   {service.title}
                 </h3>
 
@@ -91,7 +91,7 @@ export default function Services() {
               <div className="pt-6 border-t border-slate-100 mt-6 flex items-center justify-between">
                 <Link
                   to={`/services/${service.id}`}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1b93ad] hover:text-[#136e82]"
+                  className="inline-flex items-center gap-1.5 text-xs font-extrabold text-indigo-600 hover:text-indigo-800 transition-colors group-hover:translate-x-0.5 transform duration-150"
                 >
                   <span>Learn More</span>
                   <ArrowRight className="w-3.5 h-3.5" />

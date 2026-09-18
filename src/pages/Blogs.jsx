@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Calendar, User, Search, ArrowRight } from "lucide-react";
+import { Calendar, User, Search, ArrowRight, Sparkles, BookOpen } from "lucide-react";
 import SectionHeading from "../components/common/SectionHeading";
 import publicApi from "../api/publicApi";
 import { extractListData, resolveImageUrl } from "../utils/dataHelper";
@@ -22,7 +22,7 @@ export default function Blogs() {
           setBlogs([
             {
               id: "1",
-              title: "How to Choose the Right Stream After Class 10: Science, Commerce, or Arts ? ",
+              title: "How to Choose the Right Stream After Class 10: Science, Commerce, or Arts?",
               excerpt: "A comprehensive guide on evaluating your psychological temperament and aptitude rather than peer pressure.",
               thumbnail: "/assets/images/blog/01.jpg",
               author: "KYP5 Counseling Wing",
@@ -62,7 +62,7 @@ export default function Blogs() {
   return (
     <div className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
       <SectionHeading
-        badge="Career Insights & Articles"
+        badge="Career Insights & Research"
         title="Psychometric & Guidance Articles"
         subtitle="In-depth analysis, research papers, and parent guides written by licensed psychologists and senior career advisors."
       />
@@ -75,13 +75,13 @@ export default function Blogs() {
           placeholder="Search articles and topics..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full bg-white border border-slate-200 rounded-2xl pl-10 pr-4 py-3 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#1b93ad] shadow-xs"
+          className="w-full bg-white border border-slate-200 rounded-2xl pl-10 pr-4 py-3 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 shadow-xs transition-all"
         />
       </div>
 
       {loading ? (
         <div className="min-h-[250px] flex items-center justify-center">
-          <div className="w-10 h-10 border-4 border-[#1b93ad] border-t-transparent rounded-full animate-spin" />
+          <div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -92,7 +92,7 @@ export default function Blogs() {
             return (
               <div
                 key={blog.id || idx}
-                className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
+                className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:border-indigo-200 transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
                   <div className="relative h-52 bg-slate-100 overflow-hidden">
@@ -104,7 +104,7 @@ export default function Blogs() {
                         e.target.src = fallbackImg;
                       }}
                     />
-                    <div className="absolute top-4 left-4 bg-white/95 px-3 py-1 rounded-full text-[11px] font-extrabold text-[#1b93ad] shadow-xs">
+                    <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-[11px] font-extrabold text-indigo-700 shadow-xs border border-indigo-100">
                       {blog.category?.name || "Career Strategy"}
                     </div>
                   </div>
@@ -112,7 +112,7 @@ export default function Blogs() {
                   <div className="p-6 space-y-3">
                     <div className="flex items-center gap-4 text-xs font-semibold text-slate-400">
                       <span className="flex items-center gap-1.5">
-                        <Calendar className="w-3.5 h-3.5" />
+                        <Calendar className="w-3.5 h-3.5 text-indigo-500" />
                         {new Date(blog.createdAt || Date.now()).toLocaleDateString("en-IN", {
                           month: "short",
                           day: "numeric",
@@ -120,12 +120,12 @@ export default function Blogs() {
                         })}
                       </span>
                       <span className="flex items-center gap-1.5">
-                        <User className="w-3.5 h-3.5" />
+                        <User className="w-3.5 h-3.5 text-indigo-500" />
                         {blog.author || "Editorial Team"}
                       </span>
                     </div>
 
-                    <h3 className="text-base sm:text-lg font-extrabold text-[#0f172a] group-hover:text-[#1b93ad] transition-colors line-clamp-2">
+                    <h3 className="text-base sm:text-lg font-extrabold text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-2 leading-snug">
                       {blog.title}
                     </h3>
 
@@ -138,7 +138,7 @@ export default function Blogs() {
                 <div className="p-6 pt-0 border-t border-slate-100 mt-2 flex items-center justify-between">
                   <Link
                     to={`/our-blogs/${blog.id}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#1b93ad] hover:text-[#136e82] transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs font-extrabold text-indigo-600 hover:text-indigo-800 transition-colors group-hover:translate-x-0.5 transform duration-150"
                   >
                     <span>Read Full Article</span>
                     <ArrowRight className="w-3.5 h-3.5" />

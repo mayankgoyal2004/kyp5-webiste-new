@@ -47,7 +47,7 @@ export default function TermsConditions() {
       <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-sm">
         {loading ? (
           <div className="min-h-[200px] flex items-center justify-center">
-            <div className="w-10 h-10 border-4 border-[#1b93ad] border-t-transparent rounded-full animate-spin" />
+            <div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
           </div>
         ) : (
           <RichTextContent content={doc?.content} />

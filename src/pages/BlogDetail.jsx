@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Calendar, User, Share2 } from "lucide-react";
+import { ArrowLeft, Calendar, User, Share2, Sparkles, BookOpen } from "lucide-react";
 import publicApi from "../api/publicApi";
 import { extractItemData, resolveImageUrl } from "../utils/dataHelper";
 import RichTextContent from "../components/common/RichTextContent";
@@ -56,7 +56,7 @@ export default function BlogDetail() {
   if (loading) {
     return (
       <div className="min-h-[50vh] flex items-center justify-center">
-        <div className="w-10 h-10 border-4 border-[#1b93ad] border-t-transparent rounded-full animate-spin" />
+        <div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -68,7 +68,7 @@ export default function BlogDetail() {
     <div className="py-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
       <Link
         to="/our-blogs"
-        className="inline-flex items-center gap-2 text-xs font-bold text-[#1b93ad] hover:text-[#136e82]"
+        className="inline-flex items-center gap-2 text-xs font-extrabold text-indigo-600 hover:text-indigo-800 transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         <span>Back to Articles</span>
@@ -78,7 +78,7 @@ export default function BlogDetail() {
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-6">
           <div className="flex items-center gap-4 text-xs font-semibold text-slate-400">
             <span className="flex items-center gap-1.5">
-              <Calendar className="w-4 h-4" />
+              <Calendar className="w-4 h-4 text-indigo-500" />
               {new Date(blog?.createdAt || Date.now()).toLocaleDateString("en-IN", {
                 month: "long",
                 day: "numeric",
@@ -86,26 +86,26 @@ export default function BlogDetail() {
               })}
             </span>
             <span className="flex items-center gap-1.5">
-              <User className="w-4 h-4" />
+              <User className="w-4 h-4 text-indigo-500" />
               {blog?.author || "KYP5 Clinical Psychologists"}
             </span>
           </div>
 
           <button
             onClick={handleShare}
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-slate-900 bg-slate-100 px-3 py-1.5 rounded-xl cursor-pointer"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-3.5 py-1.5 rounded-xl cursor-pointer transition-colors"
           >
             <Share2 className="w-3.5 h-3.5" />
             <span>Share</span>
           </button>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0f172a] leading-tight">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 leading-tight">
           {blog?.title}
         </h1>
 
         {imgSrc && (
-          <div className="rounded-2xl overflow-hidden max-h-96 w-full">
+          <div className="rounded-2xl overflow-hidden max-h-96 w-full border border-slate-100">
             <img
               src={imgSrc}
               alt={blog?.title}

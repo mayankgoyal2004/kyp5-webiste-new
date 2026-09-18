@@ -1,5 +1,5 @@
 import React from "react";
-import { Mail, Phone, Facebook, Instagram, Linkedin, Award } from "lucide-react";
+import { Mail, Phone, Facebook, Instagram, Linkedin, ShieldCheck, Award } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useSite } from "../../context/SiteContext";
 
@@ -13,79 +13,80 @@ export default function TopBar() {
   const linkedinUrl = siteData?.footer?.socialLinks?.linkedin || "https://linkedin.com";
 
   return (
-    <div className="bg-[#1b93ad] text-white text-xs font-semibold py-2 px-4 sm:px-6 lg:px-8 border-b border-cyan-600/30">
-      <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
-        {/* Left: Contact Info + MSME */}
-        <div className="flex items-center gap-4 sm:gap-6 flex-wrap">
-          <a
-            href={`mailto:${email}`}
-            className="flex items-center gap-1.5 hover:text-cyan-100 transition-colors"
-          >
-            <Mail className="w-3.5 h-3.5" />
-            <span>{email}</span>
-          </a>
+    <div className="w-full print:hidden">
+      {/* Tricolor top indicator stripe matching testpsychometric.com */}
+      <div className="h-1 w-full bg-gradient-to-r from-orange-500 via-white to-green-600"></div>
 
-          <a
-            href={`tel:${phone.replace(/\s+/g, "")}`}
-            className="flex items-center gap-1.5 hover:text-cyan-100 transition-colors"
-          >
-            <Phone className="w-3.5 h-3.5" />
-            <span>{phone}</span>
-          </a>
-
-          <a
-            href="https://kyp5.com/assets/upload/msme.pdf"
-            target="_blank"
-            rel="noreferrer"
-            className="hidden sm:flex items-center gap-1 hover:text-cyan-100 transition-colors"
-          >
-            <Award className="w-3.5 h-3.5" />
-            <span>MSME</span>
-          </a>
-        </div>
-
-        {/* Right: Take Test Button + Socials */}
-        <div className="flex items-center gap-4 sm:gap-6 ml-auto sm:ml-0">
-          <Link
-            to="/tests"
-            className="bg-[#1e2348] hover:bg-[#141833] text-white text-[11px] font-bold px-3.5 py-1 rounded-md transition-colors shadow-xs"
-          >
-            Take Test
-          </Link>
-
-          <div className="flex items-center gap-2">
-            <span className="hidden md:inline text-[11px] text-cyan-100 font-medium">
-              Follow Us On :
+      {/* Sleek dark slate bar */}
+      <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 text-slate-300 text-xs py-1.5 px-4 sm:px-6 lg:px-8 border-b border-slate-800/80">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 h-8">
+          
+          {/* Left: Accreditation & Mission */}
+          <div className="flex items-center gap-3 truncate">
+            <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-emerald-500/90 text-white">
+              <ShieldCheck className="w-2.5 h-2.5" />
             </span>
-            <div className="flex items-center gap-1.5">
+            <p className="truncate text-xs">
+              Scientific Assessment & Career Guidance Portal · <span className="font-semibold text-white">ISO 9001 & MSME Certified</span>
+            </p>
+          </div>
+
+          {/* Right: Contact & Quick Links */}
+          <div className="flex items-center gap-4 sm:gap-6 ml-auto">
+            <a
+              href={`tel:${phone.replace(/\s+/g, "")}`}
+              className="hidden sm:flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors"
+            >
+              <Phone className="w-3.5 h-3.5 text-indigo-400" />
+              <span>{phone}</span>
+            </a>
+
+            <a
+              href={`mailto:${email}`}
+              className="hidden md:flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors"
+            >
+              <Mail className="w-3.5 h-3.5 text-indigo-400" />
+              <span>{email}</span>
+            </a>
+
+            {/* Social Links */}
+            <div className="flex items-center gap-2 pl-2 border-l border-slate-800">
               <a
                 href={facebookUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="w-5 h-5 rounded-full bg-cyan-800/40 hover:bg-[#1877f2] flex items-center justify-center text-white transition-colors"
+                className="w-5 h-5 rounded-full bg-slate-800/80 hover:bg-[#1877f2] flex items-center justify-center text-slate-300 hover:text-white transition-colors"
                 aria-label="Facebook"
               >
-                <Facebook className="w-3 h-3 fill-current" />
+                <Facebook className="w-2.5 h-2.5 fill-current" />
               </a>
               <a
                 href={instagramUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="w-5 h-5 rounded-full bg-cyan-800/40 hover:bg-pink-600 flex items-center justify-center text-white transition-colors"
+                className="w-5 h-5 rounded-full bg-slate-800/80 hover:bg-pink-600 flex items-center justify-center text-slate-300 hover:text-white transition-colors"
                 aria-label="Instagram"
               >
-                <Instagram className="w-3 h-3" />
+                <Instagram className="w-2.5 h-2.5" />
               </a>
               <a
                 href={linkedinUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="w-5 h-5 rounded-full bg-cyan-800/40 hover:bg-[#0a66c2] flex items-center justify-center text-white transition-colors"
+                className="w-5 h-5 rounded-full bg-slate-800/80 hover:bg-[#0a66c2] flex items-center justify-center text-slate-300 hover:text-white transition-colors"
                 aria-label="LinkedIn"
               >
-                <Linkedin className="w-3 h-3 fill-current" />
+                <Linkedin className="w-2.5 h-2.5 fill-current" />
               </a>
             </div>
+
+            {/* Direct Quick Test Link */}
+            <Link
+              to="/tests"
+              className="inline-flex items-center gap-1 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-[11px] px-2.5 py-0.5 rounded-full transition-colors"
+            >
+              <span>Take Test</span>
+            </Link>
           </div>
         </div>
       </div>

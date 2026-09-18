@@ -28,8 +28,8 @@ export const SiteProvider = ({ children }) => {
           orgAddress: "Educational Assessment & Guidance Center, Sector 62, Institutional Area, Noida / New Delhi NCR",
         },
         branding: {
-          primaryColor: "#1b93ad",
-          secondaryColor: "#1e2348",
+          primaryColor: "#4f46e5",
+          secondaryColor: "#0f172a",
           logoUrl: "/assets/images/logo/main-logo.png",
           logoDarkUrl: "/assets/images/logo/main-logo.png",
           siteName: "KYP5",

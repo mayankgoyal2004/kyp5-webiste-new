@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, CheckCircle2, Calendar, Phone, Mail, HelpCircle, ArrowRight } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Calendar, Phone, Mail, HelpCircle, ArrowRight, ShieldCheck, Sparkles } from "lucide-react";
 import publicApi from "../api/publicApi";
 import { extractItemData } from "../utils/dataHelper";
 import RichTextContent from "../components/common/RichTextContent";
@@ -67,16 +67,16 @@ export default function ServiceDetail() {
   if (loading) {
     return (
       <div className="min-h-[50vh] flex items-center justify-center">
-        <div className="w-10 h-10 border-4 border-[#1b93ad] border-t-transparent rounded-full animate-spin" />
+        <div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="py-12 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <div className="py-12 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
       <Link
         to="/services"
-        className="inline-flex items-center gap-2 text-xs font-bold text-[#1b93ad] hover:text-[#136e82]"
+        className="inline-flex items-center gap-2 text-xs font-extrabold text-indigo-600 hover:text-indigo-800 transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         <span>Back to Services</span>
@@ -84,10 +84,10 @@ export default function ServiceDetail() {
 
       <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-sm space-y-8">
         <div className="space-y-3 border-b border-slate-100 pb-6">
-          <span className="text-xs font-black text-[#1b93ad] uppercase tracking-wider bg-cyan-50 px-3 py-1 rounded-full">
+          <span className="text-[11px] font-black text-indigo-600 uppercase tracking-wider bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full">
             {service?.price || "Professional Guidance"}
           </span>
-          <h1 className="text-2xl sm:text-4xl font-black text-[#0f172a] leading-tight">
+          <h1 className="text-2xl sm:text-4xl font-black text-slate-900 leading-tight">
             {service?.title}
           </h1>
           <p className="text-sm text-slate-600 leading-relaxed max-w-3xl">
@@ -111,11 +111,11 @@ export default function ServiceDetail() {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {service.workProcessSteps.map((step, idx) => (
-                <div key={idx} className="bg-slate-50 p-6 rounded-2xl border border-slate-100 space-y-2">
-                  <div className="w-8 h-8 rounded-xl bg-[#1b93ad] text-white flex items-center justify-center font-black text-xs">
+                <div key={idx} className="bg-slate-50 p-6 rounded-2xl border border-slate-200/80 space-y-2">
+                  <div className="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-black text-xs shadow-xs">
                     0{idx + 1}
                   </div>
-                  <h4 className="text-sm font-bold text-slate-800">{step.title}</h4>
+                  <h4 className="text-sm font-bold text-slate-900">{step.title}</h4>
                   <p className="text-xs text-slate-600 leading-relaxed">{step.desc || step.description}</p>
                 </div>
               ))}
@@ -124,14 +124,14 @@ export default function ServiceDetail() {
         )}
 
         {/* Action Banner */}
-        <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 bg-gradient-to-r from-slate-900 to-[#1b93ad] p-6 rounded-2xl text-white">
+        <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-950 p-6 rounded-2xl text-white">
           <div>
             <h4 className="text-base font-bold text-white">Need Customized Counseling?</h4>
-            <p className="text-xs text-cyan-100 mt-0.5">Speak with a certified psychologist today.</p>
+            <p className="text-xs text-slate-400 mt-0.5">Speak with a certified psychologist and career mentor today.</p>
           </div>
           <Link
             to="/contact-us"
-            className="bg-white text-slate-900 hover:bg-cyan-50 font-bold px-6 py-2.5 rounded-xl text-xs shadow-md transition-colors whitespace-nowrap"
+            className="btn-primary text-xs py-2.5 px-6 whitespace-nowrap"
           >
             Get In Touch
           </Link>
