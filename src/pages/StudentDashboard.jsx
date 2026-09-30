@@ -5,7 +5,6 @@ import {
   GraduationCap,
   FileCheck2,
   Clock,
-  Download,
   ArrowRight,
   School,
   Sparkles,
@@ -128,7 +127,7 @@ export default function StudentDashboard() {
                       </span>
                       <span className="flex items-center gap-1 text-amber-600 font-semibold">
                         <HelpCircle className="w-3.5 h-3.5" />
-                        {t.questionCount || 70} Questions
+                        {t.questionCount ?? t.totalQuestions ?? t._count?.questions ?? 0} Questions
                       </span>
                     </div>
                   </div>

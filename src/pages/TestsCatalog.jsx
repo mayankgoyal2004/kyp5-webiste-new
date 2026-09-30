@@ -24,7 +24,7 @@ export default function TestsCatalog() {
               id: "test-stream-finder-1",
               title: "Stream Identifier & Career Profiler",
               duration: 45,
-              questionCount: 70,
+              questionCount: 4,
               image: null,
               description: "Scientifically identifies student aptitude and strengths for Science (PCM/PCB), Commerce, and Humanities streams.",
             },
@@ -55,7 +55,7 @@ export default function TestsCatalog() {
             id: "test-stream-finder-1",
             title: "Stream Identifier & Career Profiler",
             duration: 45,
-            questionCount: 70,
+            questionCount: 4,
             image: null,
             description: "Scientifically identifies student aptitude and strengths for Science (PCM/PCB), Commerce, and Humanities streams.",
           },
@@ -157,7 +157,7 @@ export default function TestsCatalog() {
                       </span>
                       <span className="flex items-center gap-1.5 text-amber-600">
                         <HelpCircle className="w-4 h-4" />
-                        {test.questionCount || 70} Questions
+                        {test.questionCount ?? test.totalQuestions ?? test._count?.questions ?? 0} Questions
                       </span>
                     </div>
 

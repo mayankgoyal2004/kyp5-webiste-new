@@ -17,6 +17,11 @@ import {
 import SectionHeading from "../components/common/SectionHeading";
 
 export default function ForSchools() {
+  const websiteUrl = (
+    import.meta.env.VITE_WEBSITE_URL ||
+    (typeof window !== "undefined" ? window.location.origin : "https://kyp5.com")
+  ).replace(/\/+$/, "");
+
   return (
     <div className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
       {/* Hero Section */}
@@ -146,7 +151,7 @@ export default function ForSchools() {
 
             <div className="bg-slate-900/80 rounded-xl p-3 text-xs space-y-1 font-mono text-slate-300">
               <div className="text-[10px] text-slate-500 uppercase">Referral Link</div>
-              <div className="text-indigo-300 truncate">https://kyp5.com/register?ref=DPS2026</div>
+              <div className="text-indigo-300 truncate">{websiteUrl}/sign-up?ref=DPS2026</div>
             </div>
           </div>
         </div>

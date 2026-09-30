@@ -1,6 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { CheckCircle2, ShieldCheck, Award, Zap, Brain, Target, ArrowRight } from "lucide-react";
+import {
+  CheckCircle2,
+  ShieldCheck,
+  Award,
+  Zap,
+  Brain,
+  Target,
+  ArrowRight,
+} from "lucide-react";
 import SectionHeading from "../common/SectionHeading";
 
 export default function WhyChooseSection() {
@@ -31,7 +39,6 @@ export default function WhyChooseSection() {
     <section className="py-16 sm:py-24 bg-white border-t border-slate-200">
       <div className="container-page">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
           {/* Left Column: Heading & Content */}
           <div className="lg:col-span-6 space-y-6">
             <SectionHeading
@@ -45,13 +52,20 @@ export default function WhyChooseSection() {
               {points.map((p, idx) => {
                 const Icon = p.icon;
                 return (
-                  <div key={idx} className="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-indigo-200 transition-colors">
+                  <div
+                    key={idx}
+                    className="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-indigo-200 transition-colors"
+                  >
                     <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
                       <Icon className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-extrabold text-slate-900">{p.title}</h4>
-                      <p className="text-xs text-slate-600 mt-1 leading-relaxed">{p.desc}</p>
+                      <h4 className="text-sm font-extrabold text-slate-900">
+                        {p.title}
+                      </h4>
+                      <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                        {p.desc}
+                      </p>
                     </div>
                   </div>
                 );
@@ -76,21 +90,30 @@ export default function WhyChooseSection() {
               </span>
 
               <h3 className="text-2xl font-black text-white leading-tight">
-                98.4% of Assessed Students Picked Streams Aligning With Natural Aptitude
+                98.4% of Assessed Students Picked Streams Aligning With Natural
+                Aptitude
               </h3>
 
               <p className="mt-3 text-xs text-slate-300 leading-relaxed">
-                By comparing individual test results against academic success benchmarks over 5 years, KYP5 psychometric profiles demonstrate unparalleled accuracy and long-term satisfaction.
+                By comparing individual test results against academic success
+                benchmarks over 5 years, KYP5 psychometric profiles demonstrate
+                unparalleled accuracy and long-term satisfaction.
               </p>
 
               <div className="mt-8 grid grid-cols-2 gap-4 border-t border-white/10 pt-6">
                 <div>
                   <div className="text-2xl font-black text-amber-400">50K+</div>
-                  <div className="text-[11px] text-slate-400 mt-0.5">Students Guided</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5">
+                    Students Guided
+                  </div>
                 </div>
                 <div>
-                  <div className="text-2xl font-black text-emerald-400">250+</div>
-                  <div className="text-[11px] text-slate-400 mt-0.5">Partner Institutions</div>
+                  <div className="text-2xl font-black text-emerald-400">
+                    250+
+                  </div>
+                  <div className="text-[11px] text-slate-400 mt-0.5">
+                    Partner Institutions
+                  </div>
                 </div>
               </div>
             </div>

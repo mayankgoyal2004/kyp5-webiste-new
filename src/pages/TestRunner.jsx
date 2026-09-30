@@ -183,6 +183,11 @@ export default function TestRunner() {
     (k) => userAnswers[k]?.selectedOptionId
   ).length;
 
+  const availableLanguages =
+    testInfo?.availableLanguages && testInfo.availableLanguages.length > 0
+      ? testInfo.availableLanguages
+      : [{ id: "en", code: "en", name: "English" }];
+
   return (
     <div className="space-y-6">
       {/* Top Test Control Bar */}
@@ -198,18 +203,30 @@ export default function TestRunner() {
 
         <div className="flex items-center gap-3">
           {/* Live Language Selector */}
-          <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200/80 px-3 py-1.5 rounded-xl text-xs font-bold">
-            <Languages className="w-3.5 h-3.5 text-slate-500" />
-            <select
-              value={selectedLanguage}
-              onChange={(e) => handleLanguageChange(e.target.value)}
-              className="bg-transparent text-slate-700 focus:outline-none cursor-pointer"
-            >
-              <option value="en">English</option>
-              <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
-              <option value="hi">हिन्दी (Hindi)</option>
-            </select>
-          </div>
+          {availableLanguages.length > 1 ? (
+            <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200/80 px-3 py-1.5 rounded-xl text-xs font-bold">
+              <Languages className="w-3.5 h-3.5 text-slate-500" />
+              <select
+                value={selectedLanguage}
+                onChange={(e) => handleLanguageChange(e.target.value)}
+                className="bg-transparent text-slate-700 focus:outline-none cursor-pointer"
+              >
+                {availableLanguages.map((lang) => (
+                  <option
+                    key={lang.code || lang.id}
+                    value={lang.code || lang.id}
+                  >
+                    {lang.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ) : (
+            <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200/80 px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600">
+              <Languages className="w-3.5 h-3.5 text-slate-500" />
+              <span>{availableLanguages[0]?.name || "English"}</span>
+            </div>
+          )}
 
           {/* Countdown Timer */}
           {testInfo?.expiresAt && (

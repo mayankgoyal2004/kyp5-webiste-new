@@ -22,7 +22,7 @@ export default function TestCategoriesSection() {
               id: "test-stream-finder-1",
               title: "Stream Identifier & Career Profiler",
               duration: 45,
-              questionCount: 70,
+              questionCount: 4,
               image: null,
               description: "Scientifically maps aptitude and personality for Science (PCM/PCB), Commerce, or Humanities.",
             },
@@ -51,7 +51,7 @@ export default function TestCategoriesSection() {
             id: "test-stream-finder-1",
             title: "Stream Identifier & Career Profiler",
             duration: 45,
-            questionCount: 70,
+            questionCount: 4,
             image: null,
             description: "Scientifically maps aptitude and personality for Science (PCM/PCB), Commerce, or Humanities.",
           },
@@ -128,7 +128,7 @@ export default function TestCategoriesSection() {
                       </span>
                       <span className="flex items-center gap-1.5 text-amber-600">
                         <HelpCircle className="w-4 h-4" />
-                        {test.questionCount || 70} Questions
+                        {test.questionCount ?? test.totalQuestions ?? test._count?.questions ?? 0} Questions
                       </span>
                     </div>
 

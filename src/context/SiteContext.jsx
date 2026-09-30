@@ -69,7 +69,7 @@ export const SiteProvider = ({ children }) => {
           orgPhone: "+91 83528 03233",
           orgEmail: "info@kyp5.com",
           orgAddress: "Educational Assessment & Guidance Center, Sector 62, Institutional Area, Noida / New Delhi NCR",
-          msmeDocUrl: "https://kyp5.com/assets/upload/msme.pdf",
+          msmeDocUrl: import.meta.env.VITE_MSME_DOC_URL || `${(import.meta.env.VITE_WEBSITE_URL || (typeof window !== "undefined" ? window.location.origin : "https://kyp5.com")).replace(/\/+$/, "")}/assets/upload/msme.pdf`,
         },
         branding: {
           primaryColor: "#4f46e5",

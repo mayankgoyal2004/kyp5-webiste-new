@@ -38,7 +38,17 @@ export default function TestInstruction() {
             const res = await studentApi.getTestDetails(id, selectedLanguage);
             const data = extractItemData(res);
             if (data && data.test) {
-              setTest(data.test);
+              const qCount =
+                data.test.questionCount ??
+                data.test.totalQuestions ??
+                data.questions?.length ??
+                data.test._count?.questions ??
+                0;
+              setTest({
+                ...data.test,
+                questionCount: qCount,
+                totalQuestions: qCount,
+              });
               return;
             }
           } catch (e) {
@@ -48,7 +58,17 @@ export default function TestInstruction() {
         const pubRes = await publicApi.getTestById(id);
         const pubData = extractItemData(pubRes);
         if (pubData) {
-          setTest(pubData);
+          const qCount =
+            pubData.questionCount ??
+            pubData.totalQuestions ??
+            pubData.questions?.length ??
+            pubData._count?.questions ??
+            0;
+          setTest({
+            ...pubData,
+            questionCount: qCount,
+            totalQuestions: qCount,
+          });
         }
       } catch (err) {
         toast.error("Failed to load test instructions.");
@@ -95,6 +115,11 @@ export default function TestInstruction() {
     );
   }
 
+  const availableLanguages =
+    test?.availableLanguages && test.availableLanguages.length > 0
+      ? test.availableLanguages
+      : [{ id: "en", code: "en", name: "English" }];
+
   return (
     <div className="py-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
       {/* Test Header */}
@@ -105,18 +130,30 @@ export default function TestInstruction() {
           </span>
 
           {/* Language Selector */}
-          <div className="flex items-center gap-2">
-            <Languages className="w-4 h-4 text-slate-500" />
-            <select
-              value={selectedLanguage}
-              onChange={(e) => setSelectedLanguage(e.target.value)}
-              className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-700 focus:outline-none focus:border-indigo-600"
-            >
-              <option value="en">English</option>
-              <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
-              <option value="hi">हिन्दी (Hindi)</option>
-            </select>
-          </div>
+          {availableLanguages.length > 1 ? (
+            <div className="flex items-center gap-2">
+              <Languages className="w-4 h-4 text-slate-500" />
+              <select
+                value={selectedLanguage}
+                onChange={(e) => setSelectedLanguage(e.target.value)}
+                className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-700 focus:outline-none focus:border-indigo-600 cursor-pointer"
+              >
+                {availableLanguages.map((lang) => (
+                  <option
+                    key={lang.code || lang.id}
+                    value={lang.code || lang.id}
+                  >
+                    {lang.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ) : (
+            <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-600">
+              <Languages className="w-3.5 h-3.5 text-slate-500" />
+              <span>{availableLanguages[0]?.name || "English"}</span>
+            </div>
+          )}
         </div>
 
         <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
@@ -130,7 +167,9 @@ export default function TestInstruction() {
           </div>
           <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
             <div className="text-[11px] text-slate-500 font-bold uppercase">Questions</div>
-            <div className="text-base font-extrabold text-slate-800 mt-0.5">{test?.questionCount || 0} Items</div>
+            <div className="text-base font-extrabold text-slate-800 mt-0.5">
+              {test?.questionCount ?? test?.totalQuestions ?? test?._count?.questions ?? 0} Items
+            </div>
           </div>
           <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
             <div className="text-[11px] text-slate-500 font-bold uppercase">Attempts</div>

@@ -123,8 +123,11 @@ export default function InstitutionRegister() {
 
   const getStudentShareUrl = () => {
     if (!registeredResult?.institution?.referralCode) return "";
-    const origin = window.location.origin;
-    return origin + "/register ? ref=" + registeredResult.institution.referralCode;
+    const origin = (
+      import.meta.env.VITE_WEBSITE_URL ||
+      (typeof window !== "undefined" ? window.location.origin : "https://kyp5.com")
+    ).replace(/\/+$/, "");
+    return `${origin}/sign-up?ref=${registeredResult.institution.referralCode}`;
   };
 
   const handleCopyLink = () => {

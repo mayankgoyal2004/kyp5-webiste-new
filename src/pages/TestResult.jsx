@@ -2,14 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
   Award,
-  Download,
   CheckCircle,
   FileText,
   Compass,
   BarChart3,
   Sparkles,
   ArrowRight,
-  RefreshCw
 } from "lucide-react";
 import studentApi from "../api/studentApi";
 import confetti from "canvas-confetti";
@@ -19,7 +17,6 @@ export default function TestResult() {
   const { attemptId } = useParams();
   const [resultData, setResultData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [reportStatus, setReportStatus] = useState("PROCESSING");
 
   useEffect(() => {
     // Fire celebration confetti upon landing
@@ -35,8 +32,6 @@ export default function TestResult() {
         const res = await studentApi.getResultById(attemptId);
         if (res && res.data) {
           setResultData(res.data);
-          const status = res.data.generatedReport?.status || res.data.assessmentResult?.reportStatus || "PROCESSING";
-          setReportStatus(status);
         }
       } catch (err) {
         console.warn("Could not fetch fresh result", err);
@@ -47,27 +42,6 @@ export default function TestResult() {
 
     fetchResult();
   }, [attemptId]);
-
-  // Polling for report readiness if in PROCESSING
-  useEffect(() => {
-    if (reportStatus === "READY") return;
-
-    const interval = setInterval(async () => {
-      try {
-        const res = await studentApi.getResultById(attemptId);
-        if (res && res.data) {
-          const status = res.data.generatedReport?.status || res.data.assessmentResult?.reportStatus;
-          if (status === "READY") {
-            setReportStatus("READY");
-            setResultData(res.data);
-            clearInterval(interval);
-          }
-        }
-      } catch (e) {}
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [attemptId, reportStatus]);
 
   if (loading) {
     return (
@@ -105,24 +79,19 @@ export default function TestResult() {
           </p>
         </div>
 
-        {/* PDF Download Button */}
-        <div>
-          {reportStatus === "READY" ? (
-            <a
-              href={resultData?.generatedReport?.filePath || "/assets/images/common-kyp5.jpg"}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-6 py-3.5 rounded-2xl shadow-lg transition-all text-xs sm:text-sm"
-            >
-              <Download className="w-4 h-4" />
-              <span>Download Official Report PDF</span>
-            </a>
-          ) : (
-            <div className="inline-flex items-center gap-2 bg-white/10 text-slate-300 font-bold px-5 py-3 rounded-2xl text-xs border border-white/15 animate-pulse">
-              <RefreshCw className="w-4 h-4 animate-spin text-indigo-400" />
-              <span>Generating Certified PDF...</span>
-            </div>
-          )}
+        {/* Official Report Institutional Notice & Back to Dashboard */}
+        <div className="flex flex-col items-center sm:items-end gap-2.5 text-center sm:text-right shrink-0">
+          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-white/15 text-xs text-slate-200">
+            <FileText className="w-4 h-4 text-emerald-400 shrink-0" />
+            <span>Official Report is available via your Counselor / Admin</span>
+          </div>
+          <Link
+            to="/student/dashboard"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-300 hover:text-white transition-colors"
+          >
+            <span>Back to Dashboard</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
         </div>
       </div>
 

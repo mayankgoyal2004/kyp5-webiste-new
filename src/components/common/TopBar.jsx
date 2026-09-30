@@ -7,7 +7,8 @@ export default function TopBar() {
 
   const email = siteData?.contact?.email || siteData?.general?.orgEmail || "info@kyp5.com";
   const phone = siteData?.contact?.phone || siteData?.general?.orgPhone || "+91 83528 03233";
-  const msmeDocUrl = siteData?.general?.msmeDocUrl || siteData?.msmeDocUrl || "https://kyp5.com/assets/upload/msme.pdf";
+  const defaultMsmeUrl = import.meta.env.VITE_MSME_DOC_URL || `${(import.meta.env.VITE_WEBSITE_URL || (typeof window !== "undefined" ? window.location.origin : "https://kyp5.com")).replace(/\/+$/, "")}/assets/upload/msme.pdf`;
+  const msmeDocUrl = siteData?.general?.msmeDocUrl || siteData?.msmeDocUrl || defaultMsmeUrl;
 
   const formatExternalUrl = (url) => {
     if (!url || typeof url !== "string") return "";
