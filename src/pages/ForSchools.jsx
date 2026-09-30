@@ -25,7 +25,7 @@ export default function ForSchools() {
           <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wider bg-white/10 text-indigo-300 backdrop-blur-md border border-white/10">
             <School className="w-3.5 h-3.5" />
             <span>Institutional Career Guidance Solution</span>
-          </span>
+          </span> 
 
           <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
             Standardize Career Counseling Across Your <span className="text-indigo-400">Entire School</span>

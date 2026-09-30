@@ -20,8 +20,6 @@ import AboutUs from "./pages/AboutUs";
 import WhyChooseUs from "./pages/WhyChooseUs";
 import OurTeam from "./pages/OurTeam";
 import Gallery from "./pages/Gallery";
-import Events from "./pages/Events";
-import EventDetail from "./pages/EventDetail";
 import Blogs from "./pages/Blogs";
 import BlogDetail from "./pages/BlogDetail";
 import HelpCenter from "./pages/HelpCenter";
@@ -90,9 +88,7 @@ export default function App() {
               <Route path="/instruction" element={<TestsCatalog />} />
 
               <Route path="/gallery" element={<Gallery />} />
-              <Route path="/events" element={<Events />} />
-              <Route path="/upcoming-events" element={<Events />} />
-              <Route path="/events/:id" element={<EventDetail />} />
+              
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-conditions" element={<TermsConditions />} />
 

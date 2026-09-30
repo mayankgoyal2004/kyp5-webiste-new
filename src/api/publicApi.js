@@ -4,6 +4,8 @@ export const publicApi = {
   // Site Configuration & Branding
   getSiteConfig: () => apiClient.get("public/settings/site-config"),
   getSiteSettings: () => apiClient.get("public/settings/site"),
+  getDirectSiteConfig: () => apiClient.get("settings/site-config"),
+  getDirectSiteSettings: () => apiClient.get("settings/site"),
   getPrivacyPolicy: () => apiClient.get("public/settings/privacy-policy"),
   getTermsConditions: () => apiClient.get("public/settings/terms-conditions"),
 
@@ -24,10 +26,6 @@ export const publicApi = {
   // Services & Solutions
   getServices: () => apiClient.get("public/services"),
   getServiceBySlug: (slug) => apiClient.get(`public/services/${slug}`),
-
-  // Events & Webinars
-  getEvents: (params) => apiClient.get("public/events", { params }),
-  getEventById: (id) => apiClient.get(`public/events/${id}`),
 
   // Team & Psychologists
   getTeam: () => apiClient.get("public/teams"),

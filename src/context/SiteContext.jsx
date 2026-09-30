@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import publicApi from "../api/publicApi";
-import { extractItemData } from "../utils/dataHelper";
+import { extractItemData, resolveImageUrl } from "../utils/dataHelper";
 
 const SiteContext = createContext();
 
@@ -11,21 +11,65 @@ export const SiteProvider = ({ children }) => {
   const fetchSiteConfig = async () => {
     try {
       setLoading(true);
-      const res = await publicApi.getSiteConfig();
-      const data = extractItemData(res);
-      if (data) {
-        setSiteData(data);
+      let res;
+      try {
+        res = await publicApi.getSiteConfig();
+      } catch (e1) {
+        try {
+          res = await publicApi.getDirectSiteConfig();
+        } catch (e2) {
+          try {
+            res = await publicApi.getSiteSettings();
+          } catch (e3) {
+            res = await publicApi.getDirectSiteSettings();
+          }
+        }
+      }
+
+      let data = extractItemData(res);
+      if (data && typeof data === "object") {
+        // Ensure data has unified structure
+        const normalized = {
+          ...data,
+          branding: data.branding || data.data?.branding || {},
+          general: data.general || data.data?.general || {},
+          contact: data.contact || data.data?.contact || {},
+          footer: data.footer || data.data?.footer || {},
+          hero: data.hero || data.data?.hero || {},
+          about: data.about || data.data?.about || {},
+          whyChooseUs: data.whyChooseUs || data.data?.whyChooseUs || {},
+        };
+        // Provide backward compatible .data pointer
+        normalized.data = normalized;
+        setSiteData(normalized);
+
+        // Dynamically update favicon if provided by backend
+        const faviconUrl = normalized.branding?.faviconUrl || normalized.branding?.favIcon || normalized.branding?.logoUrl;
+        if (faviconUrl) {
+          const existingFavicon = document.querySelector("link[rel*='icon']");
+          if (existingFavicon) {
+            existingFavicon.href = resolveImageUrl(faviconUrl, "/assets/images/logo/fav-kyp5.png");
+          }
+        }
+
+        // Dynamically update document title if provided
+        const siteName = normalized.branding?.siteName || normalized.general?.orgShortName || "KYP5";
+        const tagline = normalized.branding?.tagline || "Scientific Career Guidance";
+        if (siteName) {
+          document.title = `${siteName} — ${tagline}`;
+        }
       }
     } catch (err) {
       console.warn("Using default site branding configuration:", err.message);
       // Fallback defaults matching authentic KYP5 branding
-      setSiteData({
+      const fallback = {
         general: {
           orgName: "KYP5 - Know Your Potential, Personality, Progress & Path",
           orgShortName: "KYP5",
           orgPhone: "+91 83528 03233",
           orgEmail: "info@kyp5.com",
           orgAddress: "Educational Assessment & Guidance Center, Sector 62, Institutional Area, Noida / New Delhi NCR",
+          msmeDocUrl: "https://kyp5.com/assets/upload/msme.pdf",
         },
         branding: {
           primaryColor: "#4f46e5",
@@ -33,7 +77,7 @@ export const SiteProvider = ({ children }) => {
           logoUrl: "/assets/images/logo/main-logo.png",
           logoDarkUrl: "/assets/images/logo/main-logo.png",
           siteName: "KYP5",
-          tagline: "Know Your Power, Potential, Personality, Purpose, & Path",
+          tagline: "Scientific Career Guidance",
         },
         contact: {
           title: "Get In Touch With Career Experts",
@@ -44,6 +88,7 @@ export const SiteProvider = ({ children }) => {
           workingHours: "Mon - Sat: 09:30 AM - 06:30 PM",
         },
         footer: {
+          copyrightText: "© 2026 KYP5. All Rights Reserved.",
           about: "KYP5 (Know Your Potential, Personality, Progress & Path) is an advanced psychometric assessment and career guidance platform empowering students with data-driven career choices.",
           socialLinks: {
             facebook: "https://www.facebook.com/KnowYourP5/",
@@ -53,10 +98,10 @@ export const SiteProvider = ({ children }) => {
           },
         },
         hero: {
-          title: "Welcome to our Platform",
+          title: "Discover Your True Potential with Scientific Career Guidance",
           subtitle: "We provide the best tools for your success. Scientific psychometric mapping for stream selection, aptitude discovery, and career excellence.",
-          ctaText: "Get Started",
-          ctaLink: "/tests",
+          ctaText: "Enroll School",
+          ctaLink: "/for-schools",
           image: "/assets/hero.png",
         },
         about: {
@@ -68,7 +113,9 @@ export const SiteProvider = ({ children }) => {
           title: "Engineered for Accuracy, Built for Students",
           subtitle: "Discover what sets our psychometric testing engine and career guidance algorithms apart from generic surveys.",
         },
-      });
+      };
+      fallback.data = fallback;
+      setSiteData(fallback);
     } finally {
       setLoading(false);
     }

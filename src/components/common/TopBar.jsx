@@ -1,5 +1,4 @@
-import React from "react";
-import { Mail, Phone, Facebook, Instagram, Linkedin, ShieldCheck, Award } from "lucide-react";
+import { Mail, Phone, Facebook, Instagram, Linkedin, Twitter, ShieldCheck, Award } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useSite } from "../../context/SiteContext";
 
@@ -8,9 +7,19 @@ export default function TopBar() {
 
   const email = siteData?.contact?.email || siteData?.general?.orgEmail || "info@kyp5.com";
   const phone = siteData?.contact?.phone || siteData?.general?.orgPhone || "+91 83528 03233";
-  const facebookUrl = siteData?.footer?.socialLinks?.facebook || "https://www.facebook.com/KnowYourP5/";
-  const instagramUrl = siteData?.footer?.socialLinks?.instagram || "https://www.instagram.com/know_about_your_power";
-  const linkedinUrl = siteData?.footer?.socialLinks?.linkedin || "https://linkedin.com";
+  const msmeDocUrl = siteData?.general?.msmeDocUrl || siteData?.msmeDocUrl || "https://kyp5.com/assets/upload/msme.pdf";
+
+  const formatExternalUrl = (url) => {
+    if (!url || typeof url !== "string") return "";
+    const clean = url.trim();
+    if (!clean) return "";
+    return clean.startsWith("http://") || clean.startsWith("https://") ? clean : `https://${clean}`;
+  };
+
+  const facebookUrl = formatExternalUrl(siteData?.footer?.socialLinks?.facebook || siteData?.socialLinks?.facebook || "https://www.facebook.com/KnowYourP5/");
+  const instagramUrl = formatExternalUrl(siteData?.footer?.socialLinks?.instagram || siteData?.socialLinks?.instagram || "https://www.instagram.com/know_about_your_power");
+  const linkedinUrl = formatExternalUrl(siteData?.footer?.socialLinks?.linkedin || siteData?.socialLinks?.linkedin);
+  const twitterUrl = formatExternalUrl(siteData?.footer?.socialLinks?.twitter || siteData?.socialLinks?.twitter);
 
   return (
     <div className="w-full print:hidden">
@@ -27,7 +36,15 @@ export default function TopBar() {
               <ShieldCheck className="w-2.5 h-2.5" />
             </span>
             <p className="truncate text-xs">
-              Scientific Assessment & Career Guidance Portal · <span className="font-semibold text-white">ISO 9001 & MSME Certified</span>
+              Scientific Assessment & Career Guidance Portal ·{" "}
+              <a
+                href={msmeDocUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="font-semibold text-white hover:text-indigo-300 underline decoration-slate-600 underline-offset-2 transition-colors"
+              >
+                ISO 9001 & MSME Certified
+              </a>
             </p>
           </div>
 
@@ -51,33 +68,50 @@ export default function TopBar() {
 
             {/* Social Links */}
             <div className="flex items-center gap-2 pl-2 border-l border-slate-800">
-              <a
-                href={facebookUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="w-5 h-5 rounded-full bg-slate-800/80 hover:bg-[#1877f2] flex items-center justify-center text-slate-300 hover:text-white transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook className="w-2.5 h-2.5 fill-current" />
-              </a>
-              <a
-                href={instagramUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="w-5 h-5 rounded-full bg-slate-800/80 hover:bg-pink-600 flex items-center justify-center text-slate-300 hover:text-white transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-2.5 h-2.5" />
-              </a>
-              <a
-                href={linkedinUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="w-5 h-5 rounded-full bg-slate-800/80 hover:bg-[#0a66c2] flex items-center justify-center text-slate-300 hover:text-white transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-2.5 h-2.5 fill-current" />
-              </a>
+              {facebookUrl && (
+                <a
+                  href={facebookUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-5 h-5 rounded-full bg-slate-800/80 hover:bg-[#1877f2] flex items-center justify-center text-slate-300 hover:text-white transition-colors"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="w-2.5 h-2.5 fill-current" />
+                </a>
+              )}
+              {instagramUrl && (
+                <a
+                  href={instagramUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-5 h-5 rounded-full bg-slate-800/80 hover:bg-pink-600 flex items-center justify-center text-slate-300 hover:text-white transition-colors"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="w-2.5 h-2.5" />
+                </a>
+              )}
+              {linkedinUrl && (
+                <a
+                  href={linkedinUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-5 h-5 rounded-full bg-slate-800/80 hover:bg-[#0a66c2] flex items-center justify-center text-slate-300 hover:text-white transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin className="w-2.5 h-2.5 fill-current" />
+                </a>
+              )}
+              {twitterUrl && (
+                <a
+                  href={twitterUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-5 h-5 rounded-full bg-slate-800/80 hover:bg-[#1da1f2] flex items-center justify-center text-slate-300 hover:text-white transition-colors"
+                  aria-label="Twitter"
+                >
+                  <Twitter className="w-2.5 h-2.5 fill-current" />
+                </a>
+              )}
             </div>
 
             {/* Direct Quick Test Link */}

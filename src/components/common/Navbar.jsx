@@ -96,9 +96,11 @@ export default function Navbar() {
   };
 
   const logoSrc = resolveImageUrl(
-    siteData?.branding?.logoUrl,
+    siteData?.branding?.logoUrl || siteData?.data?.branding?.logoUrl,
     "/assets/images/logo/main-logo.png"
   );
+  const siteName = siteData?.branding?.siteName || siteData?.general?.orgShortName || "KYP5";
+  const tagline = siteData?.branding?.tagline || siteData?.general?.tagline || "Scientific Career Guidance";
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-[0_2px_12px_rgba(0,0,0,0.03)] transition-all">
@@ -106,23 +108,27 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-[68px] sm:h-20 gap-3">
           
           {/* Brand Logo */}
-          <Link to="/" className="flex items-center gap-3 shrink-0 py-2 group">
-            <span className="relative inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white shadow-xs ring-1 ring-slate-200/80 transition group-hover:ring-indigo-300">
+          <Link to="/" className="flex items-center gap-3 shrink-0 py-1.5 group">
+            <span className="relative inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-xs border border-slate-200/90 transition group-hover:border-indigo-300 group-hover:shadow-md p-1.5 shrink-0">
               <img
                 src={logoSrc}
-                alt={siteData?.general?.orgName || "KYP5 Logo"}
-                className="h-8 w-8 sm:h-9 sm:w-9 object-contain"
+                alt={siteName}
+                className="h-full w-full object-contain"
                 onError={(e) => {
                   e.target.src = "/assets/images/logo/main-logo.png";
                 }}
               />
             </span>
             <div className="leading-tight">
-              <span className="block text-lg font-extrabold tracking-tight text-slate-900">
-                KYP<span className="text-indigo-600">5</span>
+              <span className="block text-xl font-black tracking-tight text-slate-900">
+                {siteName === "KYP5" ? (
+                  <>KYP<span className="text-indigo-600">5</span></>
+                ) : (
+                  siteName
+                )}
               </span>
-              <span className="block text-[11px] font-medium text-slate-500">
-                Scientific Career Guidance
+              <span className="block text-xs font-semibold text-slate-500">
+                {tagline}
               </span>
             </div>
           </Link>

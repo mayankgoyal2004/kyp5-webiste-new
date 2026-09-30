@@ -4,6 +4,7 @@ import {
   Facebook,
   Instagram,
   Linkedin,
+  Twitter,
   Mail,
   Phone,
   Send,
@@ -34,9 +35,17 @@ export default function Footer() {
     "/assets/images/logo/main-logo.png"
   );
 
-  const facebookUrl = siteData?.footer?.socialLinks?.facebook || "https://www.facebook.com/KnowYourP5/";
-  const instagramUrl = siteData?.footer?.socialLinks?.instagram || "https://www.instagram.com/know_about_your_power";
-  const linkedinUrl = siteData?.footer?.socialLinks?.linkedin || "https://linkedin.com";
+  const formatExternalUrl = (url) => {
+    if (!url || typeof url !== "string") return "";
+    const clean = url.trim();
+    if (!clean) return "";
+    return clean.startsWith("http://") || clean.startsWith("https://") ? clean : `https://${clean}`;
+  };
+
+  const facebookUrl = formatExternalUrl(siteData?.footer?.socialLinks?.facebook || "https://www.facebook.com/KnowYourP5/");
+  const instagramUrl = formatExternalUrl(siteData?.footer?.socialLinks?.instagram || "https://www.instagram.com/know_about_your_power");
+  const linkedinUrl = formatExternalUrl(siteData?.footer?.socialLinks?.linkedin);
+  const twitterUrl = formatExternalUrl(siteData?.footer?.socialLinks?.twitter);
 
   const handleNewsletter = async (e) => {
     e.preventDefault();
@@ -85,33 +94,50 @@ export default function Footer() {
             </p>
 
             <div className="pt-2 flex items-center gap-3">
-              <a
-                href={facebookUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 hover:bg-[#1877f2] hover:border-transparent text-slate-400 hover:text-white flex items-center justify-center transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook className="w-4 h-4 fill-current" />
-              </a>
-              <a
-                href={instagramUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 hover:bg-pink-600 hover:border-transparent text-slate-400 hover:text-white flex items-center justify-center transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a
-                href={linkedinUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 hover:bg-[#0a66c2] hover:border-transparent text-slate-400 hover:text-white flex items-center justify-center transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-4 h-4 fill-current" />
-              </a>
+              {facebookUrl && (
+                <a
+                  href={facebookUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 hover:bg-[#1877f2] hover:border-transparent text-slate-400 hover:text-white flex items-center justify-center transition-colors"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="w-4 h-4 fill-current" />
+                </a>
+              )}
+              {instagramUrl && (
+                <a
+                  href={instagramUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 hover:bg-pink-600 hover:border-transparent text-slate-400 hover:text-white flex items-center justify-center transition-colors"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="w-4 h-4" />
+                </a>
+              )}
+              {linkedinUrl && (
+                <a
+                  href={linkedinUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 hover:bg-[#0a66c2] hover:border-transparent text-slate-400 hover:text-white flex items-center justify-center transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin className="w-4 h-4 fill-current" />
+                </a>
+              )}
+              {twitterUrl && (
+                <a
+                  href={twitterUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 hover:bg-[#1da1f2] hover:border-transparent text-slate-400 hover:text-white flex items-center justify-center transition-colors"
+                  aria-label="Twitter"
+                >
+                  <Twitter className="w-4 h-4 fill-current" />
+                </a>
+              )}
             </div>
           </div>
 
@@ -245,7 +271,24 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>© {new Date().getFullYear()} {siteData?.general?.orgName || "KYP5 Assessment Portal"} · All Rights Reserved.</p>
+          <p>
+            {(() => {
+              const rawCopyright = siteData?.footer?.copyrightText || siteData?.footer?.copyright;
+              if (rawCopyright) {
+                if (rawCopyright.includes("©") || rawCopyright.toLowerCase().includes("all rights reserved")) {
+                  return rawCopyright;
+                }
+                return `© ${new Date().getFullYear()} ${rawCopyright} · All Rights Reserved.`;
+              }
+              const displayBrand =
+                siteData?.branding?.siteName ||
+                siteData?.general?.orgShortName ||
+                (siteData?.general?.orgName && siteData.general.orgName !== "Online Exam Platform"
+                  ? siteData.general.orgName
+                  : "KYP5");
+              return `© ${new Date().getFullYear()} ${displayBrand} · All Rights Reserved.`;
+            })()}
+          </p>
           <div className="flex items-center gap-6">
             <Link to="/privacy-policy" className="hover:text-slate-300 transition-colors">
               Privacy Policy
